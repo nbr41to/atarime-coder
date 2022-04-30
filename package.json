@@ -13,7 +13,12 @@
     "sort-package-json": "npx sort-package-json"
   },
   "lint-staged": {
-    "*": []
+    "*.{js,ts,jsx,tsx}": [
+      "yarn lint",
+      "yarn sort-package-json",
+      "yarn fmt",
+      "tsc --noEmit"
+    ]
   },
   "dependencies": {
     "next": "12.1.5",
