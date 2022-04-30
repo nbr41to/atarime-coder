@@ -1,0 +1,7 @@
+.eslintrc.js
+.prettierrc.js
+.next
+node_modules
+tsconfig.json
+package.json
+next.config.js
