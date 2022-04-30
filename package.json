@@ -14,7 +14,9 @@
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
-      "yarn lint"
+      "yarn lint",
+      "yarn fmt",
+      "tsc --noEmit"
     ]
   },
   "dependencies": {
