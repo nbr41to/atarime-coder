@@ -14,8 +14,8 @@
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
-      "yarn lint",
-      "yarn fmt",
+      "npx eslint --fix",
+      "npx prettier --write . --ignore-unknown",
       "tsc --noEmit"
     ]
   },
