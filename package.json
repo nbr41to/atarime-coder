@@ -9,11 +9,13 @@
     "lint": "next lint",
     "lint-staged": "lint-staged",
     "prepare": "husky install",
-    "sort-package-json": "npx sort-package-json --packageFile package.json --sortBy version",
+    "sort-package-json": "npx sort-package-json 'package.json'",
     "start": "next start"
   },
   "lint-staged": {
-    "*": []
+    "*.{js,ts,jsx,tsx}": [
+      "yarn lint"
+    ]
   },
   "dependencies": {
     "next": "12.1.5",
