@@ -3,22 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "prepare": "husky install",
-    "lint-staged": "lint-staged",
-    "lint": "next lint",
+    "dev": "next dev",
     "fmt": "prettier --write . --ignore-unknown",
-    "sort-package-json": "npx sort-package-json"
+    "lint": "next lint",
+    "lint-staged": "lint-staged",
+    "prepare": "husky install",
+    "sort-package-json": "npx sort-package-json --packageFile package.json --sortBy version",
+    "start": "next start"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": [
-      "yarn lint",
-      "yarn sort-package-json",
-      "yarn fmt",
-      "tsc --noEmit"
-    ]
+    "*": []
   },
   "dependencies": {
     "next": "12.1.5",
