@@ -23,7 +23,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['*.stories.tsx', 'src/pages/**/*'],
+      files: ['*.stories.tsx', 'pages/**/*'],
       rules: {
         'import/no-default-export': 'off',
       },
