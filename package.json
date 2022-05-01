@@ -10,13 +10,18 @@
     "lint-staged": "lint-staged",
     "prepare": "husky install",
     "sort-package-json": "npx sort-package-json 'package.json'",
-    "start": "next start"
+    "start": "next start",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx}": [
+    "src/**/*.{js,ts,jsx,tsx}": [
       "npx eslint --fix",
-      "npx prettier --write . --ignore-unknown",
-      "tsc --noEmit"
+      "npx prettier --write . --ignore-unknown"
+    ],
+    "pages/**/*.{js,ts,jsx,tsx}": [
+      "npx eslint --fix",
+      "npx prettier --write . --ignore-unknown"
     ]
   },
   "dependencies": {
@@ -25,20 +30,33 @@
     "react-dom": "18.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@storybook/addon-actions": "^6.4.22",
+    "@storybook/addon-essentials": "^6.4.22",
+    "@storybook/addon-interactions": "^6.4.22",
+    "@storybook/addon-links": "^6.4.22",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/react": "^6.4.22",
+    "@storybook/testing-library": "^0.0.11",
     "@types/node": "17.0.30",
     "@types/react": "18.0.8",
     "@types/react-dom": "18.0.3",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "@typescript-eslint/parser": "^5.21.0",
+    "autoprefixer": "^10.4.5",
+    "babel-loader": "^8.2.5",
     "eslint": "8.14.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "12.1.5",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-storybook": "^0.5.11",
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^7.0.0",
     "lint-staged": "^12.4.1",
+    "postcss": "^8.4.13",
     "prettier": "^2.6.2",
+    "tailwindcss": "^3.0.24",
     "typescript": "^4.6.4"
   }
 }
