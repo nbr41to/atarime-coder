@@ -1,9 +1,9 @@
 import React from 'react';
 
-interface ButtonProps {
+type ButtonProps = JSX.IntrinsicElements['button'] & {
   label: string;
   // onClick: () => void;
-}
+};
 
 /**
  * Primary UI component for user interaction

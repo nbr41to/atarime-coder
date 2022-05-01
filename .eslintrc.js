@@ -3,8 +3,8 @@ module.exports = {
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'next/core-web-vitals',
-    'prettier',
     'plugin:storybook/recommended',
+    'prettier',
   ],
   plugins: ['unused-imports', 'import'],
   parser: '@typescript-eslint/parser',
@@ -50,6 +50,7 @@ module.exports = {
         ],
       },
     ],
+    'import/no-default-export': ['error'],
     /* off */
     'react/jsx-props-no-spreading': ['off'],
     'import/prefer-default-export': ['off'],
@@ -58,19 +59,14 @@ module.exports = {
   },
   overrides: [
     {
+      // 実はいらない
       files: ['*.stories.tsx', 'pages/**/*'],
       rules: {
         'import/no-default-export': 'off',
       },
     },
     {
-      files: ['_app.tsx'],
-      rules: {
-        'react/jsx-props-no-spreading': 'off',
-      },
-    },
-    {
-      files: ['*.stories.tsx', '*.tsx'],
+      files: ['*.tsx'],
       rules: {
         'react/jsx-filename-extension': 'off',
       },
