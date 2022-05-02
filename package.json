@@ -17,11 +17,11 @@
   "lint-staged": {
     "src/**/*.{js,ts,jsx,tsx}": [
       "npx eslint --fix",
-      "prettier --write . --ignore-unknown"
+      "npx prettier --write . --ignore-unknown"
     ],
     "pages/**/*.{js,ts,jsx,tsx}": [
       "npx eslint --fix",
-      "prettier --write . --ignore-unknown"
+      "npx prettier --write . --ignore-unknown"
     ]
   },
   "dependencies": {
