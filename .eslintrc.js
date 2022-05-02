@@ -56,6 +56,7 @@ module.exports = {
     'import/prefer-default-export': ['off'],
     'import/extensions': ['off'],
     'arrow-body-style': ['off'],
+    'jsx-a11y/anchor-is-valid': ['off'],
   },
   overrides: [
     {

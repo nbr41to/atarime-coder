@@ -1,13 +1,17 @@
 import type { NextPage } from 'next';
 
-import { Button } from 'src/components/Button';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   return (
     <div>
-      <h1>あたりめコーダー🦑</h1>
-      <div className="text-9xl drop-shadow">🦑</div>
-      <Button label="aaa" />
+      <Link href="/map/1-1">
+        <a>map</a>
+      </Link>
+      <br />
+      <Link href="/editor">
+        <a>editor</a>
+      </Link>
     </div>
   );
 };
