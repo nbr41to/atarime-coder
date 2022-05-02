@@ -3,6 +3,7 @@ module.exports = {
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'next/core-web-vitals',
+    'plugin:storybook/recommended',
     'prettier',
   ],
   plugins: ['unused-imports', 'import'],
@@ -12,7 +13,8 @@ module.exports = {
   },
   rules: {
     'no-console': ['error'],
-    'import/order': ['error'],
+    'no-unused-vars': ['error'],
+    'unused-imports/no-unused-imports': ['error'],
     'react/function-component-definition': [
       'error',
       {
@@ -20,22 +22,51 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    'import/order': [
+      'error',
+      {
+        groups: [
+          'type',
+          'builtin',
+          'external',
+          'internal',
+          ['parent', 'sibling'],
+          'object',
+          'index',
+        ],
+        'newlines-between': 'always',
+        pathGroupsExcludedImportTypes: ['builtin'],
+        alphabetize: { order: 'asc', caseInsensitive: true },
+        pathGroups: [
+          // ここに書いた順序で間に1行空行をあけつつ整頓される
+          { pattern: '@/libs/**', group: 'internal', position: 'before' },
+          { pattern: '@/generated/**', group: 'internal', position: 'before' },
+          // ... 省略
+          {
+            pattern: '@/components/**',
+            group: 'internal',
+            position: 'before',
+          },
+        ],
+      },
+    ],
+    'import/no-default-export': ['error'],
+    /* off */
+    'react/jsx-props-no-spreading': ['off'],
+    'import/prefer-default-export': ['off'],
+    'import/extensions': ['off'],
+    'arrow-body-style': ['off'],
   },
   overrides: [
     {
+      // 実はいらない
       files: ['*.stories.tsx', 'pages/**/*'],
       rules: {
         'import/no-default-export': 'off',
       },
     },
     {
-      files: ['_app.tsx'],
-      rules: {
-        'react/jsx-props-no-spreading': 'off',
-      },
-    },
-    {
-      files: ['*.stories.tsx', '*.tsx'],
+      files: ['*.tsx'],
       rules: {
         'react/jsx-filename-extension': 'off',
       },
