@@ -37,10 +37,10 @@ export const useMapAction = (map: FieldMap) => {
   const [isInitial, setIsInitial] = useState(true);
   console.log('isInitial', isInitial);
 
-  // useEffect(() => {
-  //   if (isInitial) return;
-  //   setCurrentCoordinate(getCoordinate || map.initialCoordinates);
-  // }, [asPath]);
+  useEffect(() => {
+    if (isInitial) return;
+    setCurrentCoordinate(getCoordinate || map.initialCoordinates);
+  }, [asPath]);
 
   /* 移動フラグ */
   useEffect(() => {
@@ -52,10 +52,9 @@ export const useMapAction = (map: FieldMap) => {
     );
     if (route) {
       setIsInitial(true);
-      setCurrentCoordinate(route.nextCoordinate);
       router.push({
         pathname: `/field/${route.path}`,
-        // search: `?coordinate=${route.nextCoordinate.x},${route.nextCoordinate.y}`,
+        search: `?coordinate=${route.nextCoordinate.x},${route.nextCoordinate.y}`,
       });
     }
   }, [currentCoordinate, map.routes, router, isInitial]);
