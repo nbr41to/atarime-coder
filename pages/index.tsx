@@ -1,17 +1,11 @@
 import type { NextPage } from 'next';
 
-import Link from 'next/link';
+import { IndexPage } from 'src/components/page/Index';
 
 const Home: NextPage = () => {
   return (
     <div>
-      <Link href="/field/a-1">
-        <a>Field</a>
-      </Link>
-      <br />
-      <Link href="/editor">
-        <a>editor</a>
-      </Link>
+      <IndexPage />
     </div>
   );
 };

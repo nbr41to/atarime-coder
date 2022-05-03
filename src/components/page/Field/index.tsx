@@ -1,3 +1,3 @@
-import { Field } from 'src/components/model/Field';
+import { FieldPage } from './Field.page';
 
-export { Field };
+export { FieldPage };

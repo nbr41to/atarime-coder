@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-import { FieldPage } from 'src/components/page/Field/Field.page';
+import { FieldPage } from 'src/components/page/Field';
 import { mapA } from 'src/const/maps/map_a';
 
 const Map: NextPage = () => {

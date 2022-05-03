@@ -22,13 +22,13 @@ export const Field: FC<Props> = ({ blocks, coordinate }) => {
   });
 
   return (
-    <div className="ring-2 ring-slate-600 w-[600px] h-[600px] bg-lime-300 relative outline-none">
+    <div className="relative h-[600px] w-[600px] bg-lime-300 outline-none ring-2 ring-slate-600">
       <animated.div
-        className="w-[60px] h-[60px] absolute z-10 rounded-md text-6xl drop-shadow flex items-center justify-center"
+        className="absolute z-10 flex h-[60px] w-[60px] items-center justify-center rounded-md text-6xl drop-shadow"
         style={styles}
       >
         <Image
-          className="w-[60px] h-[60px]"
+          className="h-[60px] w-[60px]"
           src="/squid.png"
           alt="tree"
           layout="fill"
@@ -40,11 +40,11 @@ export const Field: FC<Props> = ({ blocks, coordinate }) => {
             <div
               // eslint-disable-next-line react/no-array-index-key
               key={`block-(${x},${y})`}
-              className="w-[60px] h-[60px] relative"
+              className="relative h-[60px] w-[60px]"
             >
               {block === 1 && (
                 <Image
-                  className="w-[60px] h-[60px]"
+                  className="h-[60px] w-[60px]"
                   src="/tree1.png"
                   alt="tree"
                   layout="fill"
@@ -52,7 +52,7 @@ export const Field: FC<Props> = ({ blocks, coordinate }) => {
               )}
               {block === 2 && (
                 <Image
-                  className="absolute w-[60px] h-[60px]"
+                  className="absolute h-[60px] w-[60px]"
                   src="/computer.png"
                   alt="computer"
                   layout="fill"
@@ -61,7 +61,7 @@ export const Field: FC<Props> = ({ blocks, coordinate }) => {
               )}
               {block === 3 && (
                 <Image
-                  className="absolute w-[60px] h-[60px]"
+                  className="absolute h-[60px] w-[60px]"
                   src="/strawberry.png"
                   alt="strawberry"
                   layout="fill"

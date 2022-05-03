@@ -1,21 +1,18 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-type ButtonProps = JSX.IntrinsicElements['button'] & {
-  label: string;
+type Props = JSX.IntrinsicElements['button'] & {
+  children: string;
   // onClick: () => void;
 };
 
-/**
- * Primary UI component for user interaction
- */
-export const Button = ({ label, ...props }: ButtonProps) => {
+export const Button: FC<Props> = ({ children, ...props }) => {
   return (
     <button
       type="button"
-      className="bg-blue-400 text-white rounded-lg p-2"
+      className="cursor-pointer rounded-lg bg-black py-2 px-6 text-white"
       {...props}
     >
-      {label}
+      {children}
     </button>
   );
 };

@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 
-import { Field } from 'src/components/page/Field';
+import { Field } from 'src/components/model/Field';
 import { useMapAction } from 'src/hooks/useMapAction';
 
 import { FieldInfo } from '../FieldInfo';
