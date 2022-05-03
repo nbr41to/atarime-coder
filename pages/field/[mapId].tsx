@@ -1,41 +1,15 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { NextPage } from 'next';
 
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import { FieldPage } from 'src/components/page/Field/Field.page';
 import { mapA } from 'src/const/maps/map_a';
 
-type Params = {
-  mapId: string;
-};
+const Map: NextPage = () => {
+  const router = useRouter();
+  const map = mapA[router.asPath.split('/')[2].split('?')[0]];
 
-type Props = {
-  map: FieldMap;
-};
-
-export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  return {
-    paths: [{ params: { mapId: 'a-1' } }, { params: { mapId: 'a-2' } }],
-    fallback: true,
-  };
-};
-
-export const getStaticProps: GetStaticProps<Props, Params> = async ({
-  params,
-}) => {
-  if (typeof params === 'undefined') {
-    throw new Error('params is undefined');
-  }
-  const { mapId } = params || {};
-
-  return {
-    props: {
-      map: mapA[mapId],
-    },
-  };
-};
-
-const Map: NextPage<Props> = ({ map }) => {
   return (
     <>
       <Head>
