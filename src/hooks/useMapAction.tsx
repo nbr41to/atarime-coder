@@ -36,7 +36,7 @@ export const useMapAction = (map: FieldMap) => {
 
   useEffect(() => {
     setCurrentCoordinate(getCoordinate || map.initialCoordinates);
-  }, [asPath, map, getCoordinate]);
+  }, [asPath]);
 
   /* 移動フラグ */
   useEffect(() => {
