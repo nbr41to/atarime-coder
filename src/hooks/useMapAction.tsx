@@ -22,7 +22,7 @@ export const useMapAction = (map: FieldMap) => {
   };
 
   const [currentCoordinate, setCurrentCoordinate] = useState<FieldCoordinate>(
-    getCoordinate() || map?.initialCoordinates
+    getCoordinate() || map.initialCoordinates
   );
   const [currentAction, setCurrentAction] =
     useState<FieldAction>(initialAction);
