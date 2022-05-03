@@ -19,7 +19,7 @@ export const useCurrentCoordinate = (map: FieldMap) => {
       revalidateOnReconnect: false,
       revalidateOnFocus: false,
       revalidateOnMount: false,
-      fallbackData: { x: 4, y: 8 },
+      fallbackData: map.initialCoordinates,
     }
   );
   // const [currentAction, setCurrentAction] =
@@ -104,6 +104,10 @@ export const useCurrentCoordinate = (map: FieldMap) => {
         break;
     }
   };
+
+  if (!currentCoordinate) {
+    return { coordinate: map.initialCoordinates, onKeyDown };
+  }
 
   return { coordinate: currentCoordinate, onKeyDown };
 };
