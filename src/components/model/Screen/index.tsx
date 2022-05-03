@@ -9,6 +9,8 @@ type Props = {
 
 export const Screen: FC<Props> = ({ map }) => {
   const { coordinate, action, onKeyDown } = useMapAction(map);
+  // eslint-disable-next-line no-console
+  console.log('Screen', coordinate);
 
   useEffect(() => {
     document.getElementById('screen')?.focus();
