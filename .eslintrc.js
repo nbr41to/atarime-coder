@@ -15,6 +15,10 @@ module.exports = {
     'no-console': ['error'],
     'no-unused-vars': ['error'],
     'unused-imports/no-unused-imports': ['error'],
+    'padding-line-between-statements': [
+      'error',
+      { blankLine: 'always', prev: '*', next: 'return' },
+    ],
     'react/function-component-definition': [
       'error',
       {
@@ -56,6 +60,7 @@ module.exports = {
     'import/prefer-default-export': ['off'],
     'import/extensions': ['off'],
     'arrow-body-style': ['off'],
+    'jsx-a11y/anchor-is-valid': ['off'],
   },
   overrides: [
     {

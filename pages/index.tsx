@@ -1,13 +1,11 @@
 import type { NextPage } from 'next';
 
-import { Button } from 'src/components/Button';
+import { IndexPage } from 'src/components/page/Index';
 
 const Home: NextPage = () => {
   return (
     <div>
-      <h1>あたりめコーダー🦑</h1>
-      <div className="text-9xl drop-shadow">🦑</div>
-      <Button label="aaa" />
+      <IndexPage />
     </div>
   );
 };
