@@ -1,5 +1,11 @@
 import { useRouter } from 'next/router';
-import { useState, KeyboardEvent, useCallback, useEffect } from 'react';
+import {
+  useState,
+  KeyboardEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+} from 'react';
 
 const initialAction = {
   objectId: '',
@@ -13,20 +19,24 @@ export const useMapAction = (map: FieldMap) => {
   const router = useRouter();
   const { asPath } = router;
 
-  const getCoordinate = () => {
+  const getCoordinate = useMemo(() => {
     const coordinate = asPath.split('?')[1];
     if (!coordinate) return undefined;
     const [x, y] = coordinate.slice(-3).split(',');
 
     return { x: Number(x), y: Number(y) };
-  };
+  }, [asPath]);
 
   const [currentCoordinate, setCurrentCoordinate] = useState<FieldCoordinate>(
-    getCoordinate() || map.initialCoordinates
+    getCoordinate || map.initialCoordinates
   );
   const [currentAction, setCurrentAction] =
     useState<FieldAction>(initialAction);
   const [isInitial, setIsInitial] = useState(true);
+
+  useEffect(() => {
+    setCurrentCoordinate(getCoordinate || map.initialCoordinates);
+  }, [asPath, map, getCoordinate]);
 
   /* 移動フラグ */
   useEffect(() => {
