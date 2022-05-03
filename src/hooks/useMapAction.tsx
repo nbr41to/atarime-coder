@@ -37,11 +37,11 @@ export const useMapAction = (map: FieldMap) => {
         r.coordinate.y === currentCoordinate.y
     );
     if (route) {
-      // window.location.href = `/field/${route.path}?coordinate=${route.nextCoordinate.x},${route.nextCoordinate.y}`;
-      router.push({
-        pathname: `/field/${route.path}`,
-        search: `?coordinate=${route.nextCoordinate.x},${route.nextCoordinate.y}`,
-      });
+      window.location.href = `/field/${route.path}?coordinate=${route.nextCoordinate.x},${route.nextCoordinate.y}`;
+      // router.push({
+      //   pathname: `/field/${route.path}`,
+      //   search: `?coordinate=${route.nextCoordinate.x},${route.nextCoordinate.y}`,
+      // });
     }
   }, [currentCoordinate, map.routes, router, isInitial]);
 
