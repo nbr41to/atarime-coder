@@ -30,7 +30,7 @@ export const mapA: FieldMapData = {
 
   'a-2': {
     blocks: [
-      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
       [1, 1, 1, 0, 0, 0, 0, 1, 1, 1],
       [1, 1, 0, 0, 0, 0, 0, 0, 1, 1],
       [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -56,18 +56,32 @@ export const mapA: FieldMapData = {
     ],
     actions: [
       {
+        objectId: '',
+        blockId: 3,
         coordinate: { x: 6, y: 4 },
         message: 'これはイチゴです。',
         willDisappear: true,
-        blockId: 3,
-        objectId: '',
       },
       {
+        objectId: '',
+        blockId: 2,
         coordinate: { x: 3, y: 4 },
         message: 'パソコンを手に入れた。',
         willDisappear: false,
-        blockId: 2,
+      },
+      {
         objectId: '',
+        blockId: 0,
+        coordinate: { x: 4, y: 0 },
+        message: 'まだ進めないようだ。',
+        willDisappear: false,
+      },
+      {
+        objectId: '',
+        blockId: 0,
+        coordinate: { x: 5, y: 0 },
+        message: 'まだ進めないようだ。',
+        willDisappear: false,
       },
     ],
   },
