@@ -15,6 +15,10 @@ module.exports = {
     'no-console': ['error'],
     'no-unused-vars': ['error'],
     'unused-imports/no-unused-imports': ['error'],
+    'padding-line-between-statements': [
+      'error',
+      { blankLine: 'always', prev: '*', next: 'return' },
+    ],
     'react/function-component-definition': [
       'error',
       {

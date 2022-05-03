@@ -5,8 +5,8 @@ import Link from 'next/link';
 const Home: NextPage = () => {
   return (
     <div>
-      <Link href="/map/1-1">
-        <a>map</a>
+      <Link href="/field/a-1">
+        <a>Field</a>
       </Link>
       <br />
       <Link href="/editor">

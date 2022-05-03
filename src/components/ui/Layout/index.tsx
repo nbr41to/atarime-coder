@@ -6,8 +6,12 @@ type Props = {
 };
 
 export const Layout: FC<Props> = ({ children }) => {
+  const focusScreen = () => {
+    document?.getElementById('screen')?.focus();
+  };
+
   return (
-    <div>
+    <div className="h-screen" role="menu" tabIndex={0} onKeyDown={focusScreen}>
       <header className="bg-orange-500 flex justify-center items-center gap-2 p-1">
         <h1 className="text-2xl font-bold text-gray-100 tracking-wider">
           あたりめコーダー
@@ -19,7 +23,9 @@ export const Layout: FC<Props> = ({ children }) => {
 
       <main className="">{children}</main>
 
-      <footer>@progLearning</footer>
+      <footer className="absolute w-full text-center bottom-0 bg-orange-500">
+        <small className="text-gray-100">@progLearning</small>
+      </footer>
     </div>
   );
 };
