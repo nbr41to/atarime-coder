@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useRouter } from 'next/router';
 import {
   useState,
@@ -30,11 +31,14 @@ export const useMapAction = (map: FieldMap) => {
   const [currentCoordinate, setCurrentCoordinate] = useState<FieldCoordinate>(
     getCoordinate || map.initialCoordinates
   );
+  console.log('currentCoordinate', currentCoordinate);
   const [currentAction, setCurrentAction] =
     useState<FieldAction>(initialAction);
   const [isInitial, setIsInitial] = useState(true);
+  console.log('isInitial', isInitial);
 
   useEffect(() => {
+    if (isInitial) return;
     setCurrentCoordinate(getCoordinate || map.initialCoordinates);
   }, [asPath]);
 
