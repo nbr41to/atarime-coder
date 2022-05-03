@@ -38,10 +38,10 @@ export const useMapAction = (map: FieldMap) => {
     );
     if (route) {
       window.location.href = `/field/${route.path}?coordinate=${route.nextCoordinate.x},${route.nextCoordinate.y}`;
-      // router.push({
-      //   pathname: `/field/${route.path}`,
-      //   search: `?coordinate=${route.nextCoordinate.x},${route.nextCoordinate.y}`,
-      // });
+      router.push({
+        pathname: `/field/${route.path}`,
+        search: `?coordinate=${route.nextCoordinate.x},${route.nextCoordinate.y}`,
+      });
     }
   }, [currentCoordinate, map.routes, router, isInitial]);
 

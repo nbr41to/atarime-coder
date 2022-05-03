@@ -1,14 +1,17 @@
 import { FC, useEffect } from 'react';
 
 import { Field } from 'src/components/page/Field';
-import { useMapAction } from 'src/hooks/useMapAction';
+import { useCurrentCoordinate } from 'src/hooks/useCurrentCoordinate';
 
 type Props = {
   map: FieldMap;
 };
 
 export const Screen: FC<Props> = ({ map }) => {
-  const { coordinate, action, onKeyDown } = useMapAction(map);
+  // const { coordinate, action, onKeyDown } = useMapAction(map);
+  const { coordinate, onKeyDown } = useCurrentCoordinate(map);
+  // eslint-disable-next-line no-console
+  console.log('Screen', coordinate);
 
   useEffect(() => {
     document.getElementById('screen')?.focus();
@@ -45,7 +48,7 @@ export const Screen: FC<Props> = ({ map }) => {
           </div>
         </div>
         <div className="w-[300px] border-double border-4 border-black rounded px-4 py-2  min-h-[100px]">
-          <p className="font-pixel font-bold">{action?.message}</p>
+          {/* <p className="font-pixel font-bold">{action?.message}</p> */}
         </div>
       </div>
     </div>
