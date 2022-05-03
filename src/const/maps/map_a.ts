@@ -15,12 +15,12 @@ export const mapA: FieldMapData = {
     initialCoordinates: { x: 3, y: 8 },
     routes: [
       {
-        path: 'a_2',
+        path: 'a-2',
         coordinate: { x: 4, y: 0 },
         nextCoordinate: { x: 4, y: 9 },
       },
       {
-        path: 'a_2',
+        path: 'a-2',
         coordinate: { x: 5, y: 0 },
         nextCoordinate: { x: 4, y: 9 },
       },
@@ -44,12 +44,12 @@ export const mapA: FieldMapData = {
     initialCoordinates: { x: 4, y: 9 },
     routes: [
       {
-        path: 'a_1',
+        path: 'a-1',
         coordinate: { x: 4, y: 9 },
         nextCoordinate: { x: 4, y: 0 },
       },
       {
-        path: 'a_1',
+        path: 'a-1',
         coordinate: { x: 5, y: 9 },
         nextCoordinate: { x: 5, y: 0 },
       },

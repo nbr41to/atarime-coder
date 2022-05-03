@@ -14,7 +14,9 @@ export const useMapAction = (map: FieldMap) => {
   const { asPath } = router;
 
   const getCoordinate = () => {
-    const [x, y] = asPath.slice(-3).split(',');
+    const coordinate = asPath.split('?')[1];
+    if (!coordinate) return undefined;
+    const [x, y] = coordinate.slice(-3).split(',');
 
     return { x: Number(x), y: Number(y) };
   };
@@ -90,7 +92,7 @@ export const useMapAction = (map: FieldMap) => {
     setIsInitial(false);
   };
 
-  const onKeyDown = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
+  const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     switch (e.key) {
       case 'ArrowUp':
       case 'w':
@@ -115,7 +117,7 @@ export const useMapAction = (map: FieldMap) => {
       default:
         break;
     }
-  }, []);
+  };
 
   return { coordinate: currentCoordinate, action: currentAction, onKeyDown };
 };
