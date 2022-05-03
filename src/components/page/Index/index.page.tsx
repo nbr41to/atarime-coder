@@ -7,7 +7,7 @@ export const IndexPage: FC = () => {
   const router = useRouter();
 
   return (
-    <div className="space-y-4 p-12 text-center">
+    <div className="p-12">
       <p>イカに転生してプログラミングを勉強しよう！</p>
       <Button onClick={() => router.push('/field/a-1')}>始める</Button>
     </div>
