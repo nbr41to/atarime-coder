@@ -20,7 +20,7 @@ export const Field: FC<Props> = ({ blocks, coordinate }) => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 160);
+    }, 200);
   }, []);
 
   const styles = useSpring({

@@ -1,13 +1,14 @@
 import { useRouter } from 'next/router';
 import { useState, KeyboardEvent, useCallback, useEffect } from 'react';
 
-const initialAction = {
-  objectId: '',
-  blockId: -1,
-  coordinate: { x: -1, y: -1 },
-  message: '',
-  willDisappear: false,
-};
+// const initialAction: Extract<FieldAction, { type: 'message' }> = {
+//   type: 'message',
+//   objectId: '',
+//   blockId: -1,
+//   coordinate: { x: -1, y: -1 },
+//   message: '',
+//   willDisappear: false,
+// };
 
 export const useMapAction = (map: FieldMap) => {
   const router = useRouter();
@@ -24,40 +25,36 @@ export const useMapAction = (map: FieldMap) => {
   const [currentCoordinate, setCurrentCoordinate] = useState<FieldCoordinate>(
     getCoordinate() || map.initialCoordinates
   );
-  const [currentAction, setCurrentAction] =
-    useState<FieldAction>(initialAction);
+
+  const [currentMessage, setCurrentMessage] = useState('');
   const [isInitial, setIsInitial] = useState(true);
 
-  /* 移動フラグ */
+  /* フラグ回収 */
   useEffect(() => {
     if (isInitial) return;
-    const route = map.routes.find(
+
+    const action = map.actions.find(
       (r) =>
         r.coordinate.x === currentCoordinate.x &&
         r.coordinate.y === currentCoordinate.y
     );
-    if (route) {
-      window.location.href = `/field/${route.path}?coordinate=${route.nextCoordinate.x},${route.nextCoordinate.y}`;
+    if (!action) {
+      setCurrentMessage('');
+
+      return;
+    }
+    if (action.type === 'message') {
+      setCurrentMessage(action.message);
+
+      return;
+    }
+    if (action.type === 'route') {
       router.push({
-        pathname: `/field/${route.path}`,
-        search: `?coordinate=${route.nextCoordinate.x},${route.nextCoordinate.y}`,
+        pathname: `/field/${action.path}`,
+        search: `?coordinate=${action.nextCoordinate.x},${action.nextCoordinate.y}`,
       });
     }
-  }, [currentCoordinate, map.routes, router, isInitial]);
-
-  /* アクションフラグ */
-  useEffect(() => {
-    const action = map.actions.find(
-      (a) =>
-        a.coordinate.x === currentCoordinate.x &&
-        a.coordinate.y === currentCoordinate.y
-    );
-    if (action) {
-      setCurrentAction(action);
-    } else {
-      setCurrentAction(initialAction);
-    }
-  }, [currentCoordinate, map.actions, router]);
+  }, [currentCoordinate, map.actions, router, isInitial]);
 
   const isMovable = useCallback(
     (x: number, y: number) => {
@@ -120,5 +117,5 @@ export const useMapAction = (map: FieldMap) => {
     }
   };
 
-  return { coordinate: currentCoordinate, action: currentAction, onKeyDown };
+  return { coordinate: currentCoordinate, message: currentMessage, onKeyDown };
 };

@@ -13,19 +13,20 @@ export const mapA: FieldMapData = {
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ],
     initialCoordinates: { x: 3, y: 8 },
-    routes: [
+    actions: [
       {
+        type: 'route',
         path: 'a-2',
         coordinate: { x: 4, y: 0 },
         nextCoordinate: { x: 4, y: 9 },
       },
       {
+        type: 'route',
         path: 'a-2',
         coordinate: { x: 5, y: 0 },
         nextCoordinate: { x: 4, y: 9 },
       },
     ],
-    actions: [],
   },
 
   'a-2': {
@@ -42,20 +43,21 @@ export const mapA: FieldMapData = {
       [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
     ],
     initialCoordinates: { x: 4, y: 9 },
-    routes: [
+    actions: [
       {
+        type: 'route',
         path: 'a-1',
         coordinate: { x: 4, y: 9 },
         nextCoordinate: { x: 4, y: 0 },
       },
       {
+        type: 'route',
         path: 'a-1',
         coordinate: { x: 5, y: 9 },
         nextCoordinate: { x: 5, y: 0 },
       },
-    ],
-    actions: [
       {
+        type: 'message',
         objectId: '',
         blockId: 3,
         coordinate: { x: 6, y: 4 },
@@ -63,13 +65,7 @@ export const mapA: FieldMapData = {
         willDisappear: true,
       },
       {
-        objectId: '',
-        blockId: 2,
-        coordinate: { x: 3, y: 4 },
-        message: 'パソコンを手に入れた。',
-        willDisappear: false,
-      },
-      {
+        type: 'message',
         objectId: '',
         blockId: 0,
         coordinate: { x: 4, y: 0 },
@@ -77,10 +73,19 @@ export const mapA: FieldMapData = {
         willDisappear: false,
       },
       {
+        type: 'message',
         objectId: '',
         blockId: 0,
         coordinate: { x: 5, y: 0 },
         message: 'まだ進めないようだ。',
+        willDisappear: false,
+      },
+      {
+        type: 'message',
+        objectId: '',
+        blockId: 2,
+        coordinate: { x: 3, y: 4 },
+        message: 'パソコンを手に入れた。',
         willDisappear: false,
       },
     ],
