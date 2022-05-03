@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { animated, useSpring } from 'react-spring';
 
 /**
@@ -15,11 +15,37 @@ type Props = {
 };
 
 export const Field: FC<Props> = ({ blocks, coordinate }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 160);
+  }, []);
+
   const styles = useSpring({
     top: 0,
     left: 0,
     to: { top: coordinate.y * 60, left: coordinate.x * 60 },
   });
+
+  if (isLoading) {
+    const words = ['S', 'Q', 'U', 'I', 'D'];
+    const character = words[Math.floor(Math.random() * words.length)];
+    const positions = [
+      'top-0 left-12',
+      'top-0 right-12',
+      'bottom-0 left-12',
+      'bottom-0 right-12',
+    ];
+    const position = positions[Math.floor(Math.random() * positions.length)];
+
+    return (
+      <div className="relative h-[600px] w-[600px] bg-white outline-none ring-2 ring-slate-600">
+        <div className={`absolute text-[120px] ${position}`}>{character}</div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative h-[600px] w-[600px] bg-lime-300 outline-none ring-2 ring-slate-600">

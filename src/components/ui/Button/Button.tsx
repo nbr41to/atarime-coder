@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 
 type Props = JSX.IntrinsicElements['button'] & {
   children: string;
-  // onClick: () => void;
 };
 
 export const Button: FC<Props> = ({ children, ...props }) => {
