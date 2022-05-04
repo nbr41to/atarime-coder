@@ -14,7 +14,7 @@ export const mapA: FieldMapData = {
       [1, 0, 0, 0, 0, 0, 0, 1, 1, 1],
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ],
-    initialCoordinates: { x: 3, y: 8 },
+    initialCoordinate: { x: 3, y: 8 },
     actions: [
       {
         type: 'route',
@@ -44,7 +44,7 @@ export const mapA: FieldMapData = {
       [1, 1, 1, 0, 0, 0, 0, 1, 1, 1],
       [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
     ],
-    initialCoordinates: { x: 4, y: 9 },
+    initialCoordinate: { x: 4, y: 9 },
     actions: [
       {
         type: 'route',

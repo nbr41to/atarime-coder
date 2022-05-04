@@ -1,13 +1,18 @@
-import type { DocumentContext } from 'next/document';
+import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
 
-import Document from 'next/document';
-
-class MyDocument extends Document {
-  static async getInitialProps(ctx: DocumentContext) {
-    const initialProps = await Document.getInitialProps(ctx);
-
-    return initialProps;
+class Document extends NextDocument {
+  render() {
+    return (
+      <Html lang="ja">
+        <Head />
+        <body>
+          <Main />
+          <div id="modal-root" />
+          <NextScript />
+        </body>
+      </Html>
+    );
   }
 }
 
-export default MyDocument;
+export default Document;
