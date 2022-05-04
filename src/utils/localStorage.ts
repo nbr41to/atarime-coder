@@ -1,6 +1,7 @@
 import type { FieldCoordinate } from '../types/field.d';
 /**
  * userName: string
+ * previousField: string
  * previousCoordinate: {x: number, y: number}
  * flags: string[]
  * TODO： それぞれのメソッドを作成する
@@ -10,9 +11,8 @@ export const localStorage = {
   /* get */
   getUserName: (): string | null => {
     if (typeof window === 'undefined') return null;
-    const json = window.localStorage.getItem('userName');
 
-    return json ? JSON.parse(json) : null;
+    return window.localStorage.getItem('userName');
   },
   getPreviousCoordinate: (): FieldCoordinate | null => {
     if (typeof window === 'undefined') return null;
@@ -22,9 +22,8 @@ export const localStorage = {
   },
   getPreviousField: (): string | null => {
     if (typeof window === 'undefined') return null;
-    const json = window.localStorage.getItem('previousField');
 
-    return json ? JSON.parse(json) : null;
+    return window.localStorage.getItem('previousField');
   },
   getFlags: (): string[] => {
     if (typeof window === 'undefined') return [];
@@ -54,18 +53,7 @@ export const localStorage = {
       window.localStorage.setItem('flags', JSON.stringify(newFlags));
     }
   },
-  updateItem: (key: string, value: FieldCoordinate) => {
-    /* previousCoordinate のみ */
-    if (typeof window === 'undefined') return;
-    const json = window.localStorage.getItem(key);
-    if (json) {
-      const data = JSON.parse(json);
-      Object.assign(data, value);
-      window.localStorage.setItem(key, JSON.stringify(data));
-    } else {
-      window.localStorage.setItem(key, JSON.stringify(value));
-    }
-  },
+  /* other */
   removeItem: (key: string) => {
     if (typeof window === 'undefined') return;
     window.localStorage.removeItem(key);
