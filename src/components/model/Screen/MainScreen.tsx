@@ -1,4 +1,7 @@
-import { FC, useEffect } from 'react';
+import type { FC } from 'react';
+import type { FieldMap } from 'src/types/field';
+
+import { useEffect } from 'react';
 
 import { Field } from 'src/components/model/Field';
 import { useMapAction } from 'src/hooks/useMapAction';

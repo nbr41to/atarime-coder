@@ -1,14 +1,8 @@
-import { useRouter } from 'next/router';
-import { useState, KeyboardEvent, useCallback, useEffect } from 'react';
+import type { KeyboardEvent } from 'react';
+import type { FieldCoordinate, FieldMap } from 'src/types/field';
 
-// const initialAction: Extract<FieldAction, { type: 'message' }> = {
-//   type: 'message',
-//   objectId: '',
-//   blockId: -1,
-//   coordinate: { x: -1, y: -1 },
-//   message: '',
-//   willDisappear: false,
-// };
+import { useRouter } from 'next/router';
+import { useState, useCallback, useEffect } from 'react';
 
 export const useMapAction = (map: FieldMap) => {
   const router = useRouter();
@@ -52,6 +46,14 @@ export const useMapAction = (map: FieldMap) => {
       router.push({
         pathname: `/field/${action.path}`,
         search: `?coordinate=${action.nextCoordinate.x},${action.nextCoordinate.y}`,
+      });
+
+      return;
+    }
+    if (action.type === 'issue') {
+      router.push({
+        pathname: `/issues/${action.issueId}`,
+        search: `?coordinate=${currentCoordinate.x},${currentCoordinate.y}`,
       });
     }
   }, [currentCoordinate, map.actions, router, isInitial]);

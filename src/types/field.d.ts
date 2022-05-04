@@ -1,19 +1,21 @@
-type FieldObject = {
+import type { ReactNode } from 'react';
+
+export type FieldObject = {
   code: number;
   name: string;
   isEnterable: boolean;
 };
 
-type FieldCoordinate = {
+export type FieldCoordinate = {
   x: number;
   y: number;
 };
-type FieldRoute = {
+export type FieldRoute = {
   path: string; // 移動先の route path
   coordinate: FieldCoordinate; // 移動のトリガーとなる座標
   nextCoordinate: FieldCoordinate; // 移動先のマップの座標
 };
-type FieldAction =
+export type FieldAction =
   | {
       type: 'route';
       path: string;
@@ -29,16 +31,24 @@ type FieldAction =
       willDisappear: boolean; // Action後に消えるかどうか
     }
   | {
+      type: 'modal';
+      objectId: string; // そのオブジェクトのユニークなID
+      blockId: number; // そのオブジェクトが存在する Block ID
+      coordinate: FieldCoordinate; // そのオブジェクトが存在する座標
+      content: ReactNode; // Modalの内容
+      willDisappear: boolean; // Action後に消えるかどうか
+    }
+  | {
       type: 'issue';
       issueId: string; // そのオブジェクトのユニークなID
       coordinate: FieldCoordinate; // そのオブジェクトが存在する座標
     };
-type FieldMap = {
+export type FieldMap = {
   blocks: number[][]; // 10 * 10 の Block ID
   initialCoordinates: FieldCoordinate; // 初期位置の座標
   actions: FieldAction[];
 };
 
-type FieldMapData = {
+export type FieldMapData = {
   [key: string]: FieldMap;
 };

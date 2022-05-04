@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import type { FC } from 'react';
+import type { FieldMap } from 'src/types/field';
 
 import { MainScreen, LoadingScreen } from 'src/components/model/Screen';
 

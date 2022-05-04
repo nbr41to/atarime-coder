@@ -1,3 +1,5 @@
+import type { FieldMapData } from 'src/types/field';
+
 export const mapA: FieldMapData = {
   'a-1': {
     blocks: [
@@ -81,12 +83,9 @@ export const mapA: FieldMapData = {
         willDisappear: false,
       },
       {
-        type: 'message',
-        objectId: '',
-        blockId: 2,
+        type: 'issue',
+        issueId: '0',
         coordinate: { x: 3, y: 4 },
-        message: 'パソコンを手に入れた。',
-        willDisappear: false,
       },
     ],
   },
