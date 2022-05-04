@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 
 import { Button } from 'src/components/ui/Button';
 import { StartButton } from 'src/components/ui/StartButton';
+import { localStorage } from 'src/utils/localStorage';
 
 export const IndexPage: FC = () => {
   const router = useRouter();
@@ -20,7 +21,17 @@ export const IndexPage: FC = () => {
         </Button>
       </div>
       <div>
-        <Button>お試し版データの削除</Button>
+        <Button
+          onClick={() => {
+            if (typeof window === 'undefined') return;
+            const result = window.confirm('本当にデータを削除しますか？');
+            if (result) {
+              localStorage.clear();
+            }
+          }}
+        >
+          お試し版データの削除
+        </Button>
       </div>
     </div>
   );
