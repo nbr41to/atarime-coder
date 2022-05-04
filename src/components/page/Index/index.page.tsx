@@ -12,7 +12,9 @@ export const IndexPage: FC = () => {
       <p>イカに転生してプログラミングを勉強しよう！</p>
       <Button onClick={() => router.push('/field/a-1')}>始める</Button>
       <br />
-      <Button onClick={() => router.push('/editor')}>editor</Button>
+      <Button onClick={() => router.push('/field/a-2')}>
+        パソコンがある場所へ
+      </Button>
     </div>
   );
 };

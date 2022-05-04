@@ -12,8 +12,13 @@ export const Layout: FC<Props> = ({ children }) => {
   };
 
   return (
-    <div className="h-screen" role="menu" tabIndex={0} onKeyDown={focusScreen}>
-      <header className="flex items-center justify-center gap-2 bg-orange-500 p-1">
+    <div
+      className="relative h-full min-h-screen"
+      role="menu"
+      tabIndex={0}
+      onKeyDown={focusScreen}
+    >
+      <header className="flex h-[52px] items-center justify-center gap-2 bg-orange-500 p-1">
         <h1 className="text-2xl font-bold tracking-wider text-gray-100">
           あたりめコーダー
         </h1>
@@ -22,10 +27,17 @@ export const Layout: FC<Props> = ({ children }) => {
         </div>
       </header>
 
-      <main className="">{children}</main>
+      <main className="h-[calc(100%-52px);]">{children}</main>
 
-      <footer className="absolute bottom-0 w-full bg-orange-500 text-center">
-        <small className="text-gray-100">@progLearning</small>
+      <footer className="absolute bottom-0 z-10 flex h-[32px] w-full items-center justify-center bg-orange-500 text-center">
+        <a
+          className="cursor-pointer text-gray-100"
+          href="https://proglab.nbr41.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          @progLearning
+        </a>
       </footer>
     </div>
   );

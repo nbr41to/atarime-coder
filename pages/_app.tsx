@@ -6,21 +6,6 @@ import { Layout } from 'src/components/ui/Layout';
 import 'styles/globals.css';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  // const router = useRouter();
-  // const pageChangeHandler = () => {
-  //   const answer = window.confirm(
-  //     'コメント内容がリセットされます、本当にページ遷移しますか？'
-  //   );
-  // };
-
-  // useEffect(() => {
-  //   router.events.on('hashChangeStart', pageChangeHandler);
-
-  //   return () => {
-  //     router.events.off('hashChangeStart', pageChangeHandler);
-  //   };
-  // }, []);
-
   return (
     <>
       <Head>
