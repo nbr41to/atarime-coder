@@ -17,9 +17,7 @@ export const useMapAction = (fieldMap: FieldMap) => {
   };
 
   const getCoordinate = (): FieldCoordinate | null => {
-    const previousCoordinate = localStorage.getItem(
-      'previousCoordinate'
-    ) as FieldCoordinate | null;
+    const previousCoordinate = localStorage.getPreviousCoordinate();
     if (previousCoordinate && isEnterable(previousCoordinate)) {
       return previousCoordinate;
     }
@@ -28,7 +26,7 @@ export const useMapAction = (fieldMap: FieldMap) => {
   };
 
   const [currentCoordinate, setCurrentCoordinate] = useState<FieldCoordinate>(
-    getCoordinate() || fieldMap.initialCoordinates
+    getCoordinate() || fieldMap.initialCoordinate
   );
   const [currentMessage, setCurrentMessage] = useState('');
   const [isInitial, setIsInitial] = useState(true);
@@ -54,7 +52,7 @@ export const useMapAction = (fieldMap: FieldMap) => {
       return;
     }
     if (action.type === 'route') {
-      localStorage.setItem('previousCoordinate', action.nextCoordinate);
+      localStorage.setPreviousCoordinate(action.nextCoordinate);
       router.push({
         pathname: `/field/${action.path}`,
         // search: `?coordinate=${action.nextCoordinate.x},${action.nextCoordinate.y}`,
@@ -63,7 +61,7 @@ export const useMapAction = (fieldMap: FieldMap) => {
       return;
     }
     if (action.type === 'issue') {
-      localStorage.setItem('previousCoordinate', currentCoordinate);
+      localStorage.setPreviousCoordinate(currentCoordinate);
       router.push(`/issues/${action.issueId}`);
     }
   }, [currentCoordinate, fieldMap.actions, router, isInitial]);

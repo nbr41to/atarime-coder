@@ -27,6 +27,7 @@ module.exports = {
         unnamedComponents: 'arrow-function',
       },
     ],
+    'import/no-default-export': ['error'],
     'import/order': [
       'error',
       {
@@ -55,13 +56,13 @@ module.exports = {
         ],
       },
     ],
-    'import/no-default-export': ['error'],
     /* off */
     'react/jsx-props-no-spreading': ['off'],
     'import/prefer-default-export': ['off'],
     'import/extensions': ['off'],
     'arrow-body-style': ['off'],
     'jsx-a11y/anchor-is-valid': ['off'],
+    'react/require-default-props': ['off'],
   },
   overrides: [
     {

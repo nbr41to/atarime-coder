@@ -6,7 +6,7 @@ import { animated, useSpring } from 'react-spring';
 
 /**
  * @param {number[][]} blocks - Map情報
- * @param {number[]} initialCoordinates - 初期座標
+ * @param {number[]} initialCoordinate - 初期座標
  */
 type Props = {
   blocks: number[][];

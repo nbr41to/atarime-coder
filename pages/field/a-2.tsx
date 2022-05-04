@@ -8,7 +8,7 @@ import { mapA } from 'src/const/field/map_a';
 
 const Map: NextPage = () => {
   const router = useRouter();
-  const map = mapA[router.asPath.split('/')[2].split('?')[0]];
+  const map = mapA[router.asPath.split('/')[2]];
 
   return (
     <>
