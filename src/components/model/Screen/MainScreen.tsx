@@ -1,4 +1,7 @@
-import { FC, useEffect } from 'react';
+import type { FC } from 'react';
+import type { FieldMap } from 'src/types/field';
+
+import { useEffect } from 'react';
 
 import { Field } from 'src/components/model/Field';
 import { useMapAction } from 'src/hooks/useMapAction';
@@ -10,7 +13,7 @@ type Props = {
 };
 
 export const MainScreen: FC<Props> = ({ map }) => {
-  const { coordinate, action, onKeyDown } = useMapAction(map);
+  const { coordinate, message, onKeyDown } = useMapAction(map);
 
   useEffect(() => {
     document.getElementById('screen')?.focus();
@@ -25,7 +28,7 @@ export const MainScreen: FC<Props> = ({ map }) => {
       onKeyDown={(e) => onKeyDown(e)}
     >
       <Field blocks={map.blocks} coordinate={coordinate} />
-      <FieldInfo message={action.message} />
+      <FieldInfo message={message} />
     </div>
   );
 };

@@ -1,94 +1,94 @@
+import type { KeyboardEvent } from 'react';
+import type { FieldCoordinate, FieldMap } from 'src/types/field';
+
 import { useRouter } from 'next/router';
-import { useState, KeyboardEvent, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const initialAction = {
-  objectId: '',
-  blockId: -1,
-  coordinate: { x: -1, y: -1 },
-  message: '',
-  willDisappear: false,
-};
+import { localStorage } from 'src/utils/localStorage';
 
-export const useMapAction = (map: FieldMap) => {
+export const useMapAction = (fieldMap: FieldMap) => {
   const router = useRouter();
-  const { asPath } = router;
 
-  const getCoordinate = () => {
-    const coordinate = asPath.split('?')[1];
-    if (!coordinate) return undefined;
-    const [x, y] = coordinate.slice(-3).split(',');
+  const isEnterable = (coordinate: FieldCoordinate) => {
+    const { x, y } = coordinate;
+    if (x < 0 || y < 0 || x > 9 || y > 9) return false;
 
-    return { x: Number(x), y: Number(y) };
+    return fieldMap.blocks[y][x] !== 1;
+  };
+
+  const getCoordinate = (): FieldCoordinate | null => {
+    const previousCoordinate = localStorage.getItem(
+      'previousCoordinate'
+    ) as FieldCoordinate | null;
+    if (previousCoordinate && isEnterable(previousCoordinate)) {
+      return previousCoordinate;
+    }
+
+    return null;
   };
 
   const [currentCoordinate, setCurrentCoordinate] = useState<FieldCoordinate>(
-    getCoordinate() || map.initialCoordinates
+    getCoordinate() || fieldMap.initialCoordinates
   );
-  const [currentAction, setCurrentAction] =
-    useState<FieldAction>(initialAction);
+  const [currentMessage, setCurrentMessage] = useState('');
   const [isInitial, setIsInitial] = useState(true);
 
-  /* 移動フラグ */
+  /* フラグ回収 */
   useEffect(() => {
     if (isInitial) return;
-    const route = map.routes.find(
+    localStorage.removeItem('previousCoordinate');
+
+    const action = fieldMap.actions.find(
       (r) =>
         r.coordinate.x === currentCoordinate.x &&
         r.coordinate.y === currentCoordinate.y
     );
-    if (route) {
-      window.location.href = `/field/${route.path}?coordinate=${route.nextCoordinate.x},${route.nextCoordinate.y}`;
+    if (!action) {
+      setCurrentMessage('');
+
+      return;
+    }
+    if (action.type === 'message') {
+      setCurrentMessage(action.message);
+
+      return;
+    }
+    if (action.type === 'route') {
+      localStorage.setItem('previousCoordinate', action.nextCoordinate);
       router.push({
-        pathname: `/field/${route.path}`,
-        search: `?coordinate=${route.nextCoordinate.x},${route.nextCoordinate.y}`,
+        pathname: `/field/${action.path}`,
+        // search: `?coordinate=${action.nextCoordinate.x},${action.nextCoordinate.y}`,
       });
+
+      return;
     }
-  }, [currentCoordinate, map.routes, router, isInitial]);
-
-  /* アクションフラグ */
-  useEffect(() => {
-    const action = map.actions.find(
-      (a) =>
-        a.coordinate.x === currentCoordinate.x &&
-        a.coordinate.y === currentCoordinate.y
-    );
-    if (action) {
-      setCurrentAction(action);
-    } else {
-      setCurrentAction(initialAction);
+    if (action.type === 'issue') {
+      localStorage.setItem('previousCoordinate', currentCoordinate);
+      router.push(`/issues/${action.issueId}`);
     }
-  }, [currentCoordinate, map.actions, router]);
-
-  const isMovable = useCallback(
-    (x: number, y: number) => {
-      if (x < 0 || y < 0 || x > 9 || y > 9) return false;
-
-      return map.blocks[y][x] !== 1;
-    },
-    [map.blocks]
-  );
+  }, [currentCoordinate, fieldMap.actions, router, isInitial]);
 
   const moveTop = () => {
     const will = { x: currentCoordinate.x, y: currentCoordinate.y - 1 };
-    if (!isMovable(will.x, will.y)) return;
+    if (!isEnterable(will)) return;
     setCurrentCoordinate(will);
     setIsInitial(false);
   };
   const moveRight = () => {
     const will = { x: currentCoordinate.x + 1, y: currentCoordinate.y };
-    if (!isMovable(will.x, will.y)) return;
+    if (!isEnterable(will)) return;
     setCurrentCoordinate(will);
     setIsInitial(false);
   };
   const moveBottom = () => {
     const will = { x: currentCoordinate.x, y: currentCoordinate.y + 1 };
-    if (!isMovable(will.x, will.y)) return;
+    if (!isEnterable(will)) return;
     setCurrentCoordinate(will);
     setIsInitial(false);
   };
   const moveLeft = () => {
     const will = { x: currentCoordinate.x - 1, y: currentCoordinate.y };
-    if (!isMovable(will.x, will.y)) return;
+    if (!isEnterable(will)) return;
     setCurrentCoordinate(will);
     setIsInitial(false);
   };
@@ -120,5 +120,5 @@ export const useMapAction = (map: FieldMap) => {
     }
   };
 
-  return { coordinate: currentCoordinate, action: currentAction, onKeyDown };
+  return { coordinate: currentCoordinate, message: currentMessage, onKeyDown };
 };

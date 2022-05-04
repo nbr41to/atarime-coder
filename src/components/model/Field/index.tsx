@@ -1,5 +1,7 @@
+import type { FC } from 'react';
+
 import Image from 'next/image';
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { animated, useSpring } from 'react-spring';
 
 /**
@@ -20,7 +22,7 @@ export const Field: FC<Props> = ({ blocks, coordinate }) => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 160);
+    }, 200);
   }, []);
 
   const styles = useSpring({
