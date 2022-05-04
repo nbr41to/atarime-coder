@@ -12,7 +12,9 @@ export const localStorage = {
   getUserName: (): string | null => {
     if (typeof window === 'undefined') return null;
 
-    return window.localStorage.getItem('userName');
+    const json = window.localStorage.getItem('userName');
+
+    return json ? json.replaceAll('"', '') : null; // ひらがながparseできないため
   },
   getPreviousCoordinate: (): FieldCoordinate | null => {
     if (typeof window === 'undefined') return null;
@@ -22,8 +24,9 @@ export const localStorage = {
   },
   getPreviousField: (): string | null => {
     if (typeof window === 'undefined') return null;
+    const json = window.localStorage.getItem('previousField');
 
-    return window.localStorage.getItem('previousField');
+    return json ? JSON.parse(json) : null;
   },
   getFlags: (): string[] => {
     if (typeof window === 'undefined') return [];
