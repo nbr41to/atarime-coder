@@ -14,7 +14,7 @@ import { localStorage } from 'src/utils/localStorage';
 
 export const IssuePage: FC = () => {
   const router = useRouter();
-  const issueId = router.asPath.split('/')[2].split('?')[0];
+  const issueId = router.asPath.split('/')[2];
   const isCleared = localStorage.getFlags().includes(issueId);
   const [visibleDiffEditor, setVisibleDiffEditor] = useState(false);
   const [value, setValue] = useState('console.log("Hello World!");\n');

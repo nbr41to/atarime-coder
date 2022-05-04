@@ -89,4 +89,43 @@ export const mapA: FieldMapData = {
       },
     ],
   },
+  'a-3': {
+    blocks: [
+      [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
+      [1, 1, 1, 0, 0, 0, 0, 1, 1, 1],
+      [1, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 2, 0, 0, 2, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+      [1, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+      [1, 1, 1, 0, 0, 0, 0, 1, 1, 1],
+      [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
+    ],
+    initialCoordinate: { x: 4, y: 9 },
+    actions: [
+      {
+        type: 'route',
+        path: 'a-1',
+        coordinate: { x: 4, y: 9 },
+        nextCoordinate: { x: 4, y: 0 },
+      },
+      {
+        type: 'route',
+        path: 'a-1',
+        coordinate: { x: 5, y: 9 },
+        nextCoordinate: { x: 5, y: 0 },
+      },
+      {
+        type: 'issue',
+        issueId: 'js-1-2',
+        coordinate: { x: 3, y: 4 },
+      },
+      {
+        type: 'issue',
+        issueId: 'js-1-3',
+        coordinate: { x: 5, y: 4 },
+      },
+    ],
+  },
 };
