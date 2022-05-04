@@ -11,14 +11,13 @@ type Props = {
   coordinate: FieldCoordinate;
 };
 
-export const FieldInfo: FC<Props> = ({ message, coordinate }) => {
+export const UIPanel: FC<Props> = ({ message, coordinate }) => {
   const router = useRouter();
-  const userName = localStorage.getItem('userName');
+  const userName = localStorage.getUserName();
 
   const saveAndGoTop = () => {
-    localStorage.setItem('previousField', router.asPath.split('/')[2]);
-    localStorage.setItem('previousCoordinate', coordinate);
-    /* 座標とマップ情報を保存しなきゃ */
+    localStorage.setPreviousField(router.asPath.split('/')[2]);
+    localStorage.setPreviousCoordinate(coordinate);
     router.push('/');
   };
 

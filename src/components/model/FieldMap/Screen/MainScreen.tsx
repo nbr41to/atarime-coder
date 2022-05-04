@@ -3,10 +3,10 @@ import type { FieldMap } from 'src/types/field';
 
 import { useEffect } from 'react';
 
-import { Field } from 'src/components/model/Field';
+import { Field } from 'src/components/model/FieldMap/Field';
 import { useMapAction } from 'src/hooks/useMapAction';
 
-import { FieldInfo } from '../FieldInfo';
+import { UIPanel } from '../UIPanel';
 
 type Props = {
   map: FieldMap;
@@ -28,7 +28,7 @@ export const MainScreen: FC<Props> = ({ map }) => {
       onKeyDown={(e) => onKeyDown(e)}
     >
       <Field blocks={map.blocks} coordinate={coordinate} />
-      <FieldInfo message={message} coordinate={coordinate} />
+      <UIPanel message={message} coordinate={coordinate} />
     </div>
   );
 };

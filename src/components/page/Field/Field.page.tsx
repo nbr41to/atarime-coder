@@ -1,7 +1,10 @@
 import type { FC } from 'react';
 import type { FieldMap } from 'src/types/field';
 
-import { MainScreen, LoadingScreen } from 'src/components/model/Screen';
+import {
+  MainScreen,
+  LoadingScreen,
+} from 'src/components/model/FieldMap/Screen';
 
 type Props = {
   map: FieldMap;

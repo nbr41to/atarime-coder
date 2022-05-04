@@ -32,7 +32,7 @@ a {
 }
 
 .codeMarker {
-  background: #320;
+  background: rgba(160, 100, 0, 0.1);
   position: absolute;
   z-index: 20;
 }

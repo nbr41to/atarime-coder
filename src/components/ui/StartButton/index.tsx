@@ -14,13 +14,13 @@ export const StartButton: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [nameState, setNameState] = useState('');
 
-  const previousField = localStorage.getItem('previousField');
-  const previousCoordinate = localStorage.getItem('previousCoordinate');
+  const previousField = localStorage.getPreviousField();
+  const previousCoordinate = localStorage.getPreviousCoordinate();
 
   const closeHandler = () => setIsOpen(false);
   const startHandler = () => setIsOpen(true);
   const nameDecided = () => {
-    localStorage.setItem('userName', nameState);
+    localStorage.setUserName(nameState);
     router.push('/field/a-1');
   };
   const continueHandler = () => {

@@ -12,7 +12,6 @@ export default {
       control: 'inline-radio',
       options: ['small', 'middle', 'large', 'full'],
     },
-    message: { control: 'text' },
   },
 } as ComponentMeta<typeof Modal>;
 
@@ -33,27 +32,23 @@ const Template: ComponentStory<typeof Modal> = (args) => {
 export const Small = Template.bind({});
 Small.args = {
   size: 'small',
-  message: 'Modal',
   children: <div className="text-center">content!!</div>,
 };
 
 export const Middle = Template.bind({});
 Middle.args = {
   size: 'middle',
-  message: 'Modal',
   children: <div className="text-center">content!!</div>,
 };
 
 export const Large = Template.bind({});
 Large.args = {
   size: 'large',
-  message: 'Modal',
   children: <div className="text-center">content!!</div>,
 };
 
 export const Full = Template.bind({});
 Full.args = {
   size: 'full',
-  message: 'Modal',
   children: <div className="text-center">content!!</div>,
 };

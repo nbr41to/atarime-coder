@@ -17,13 +17,12 @@ type Props = {
   isOpen: boolean;
   close: () => void;
   size?: 'small' | 'middle' | 'large' | 'full';
-  message?: string;
   children?: ReactNode;
 };
 
 const sizeClasses = {
-  small: 'w-40 h-60',
-  middle: 'w-[600px] h-[700px]',
+  small: 'w-60 py-4 px-6',
+  middle: 'w-[600px] py-6 px-8',
   large: 'w-[1000px] h-[800px]',
   full: 'w-full h-full m-8',
 };
@@ -32,7 +31,6 @@ export const Modal: FC<Props> = ({
   isOpen,
   close,
   size = 'middle',
-  message,
   children,
 }) => {
   // const router = useRouter();
@@ -63,9 +61,8 @@ export const Modal: FC<Props> = ({
             role="button"
             aria-label="close modal"
           />
-          <div className={`relative h-[600px] rounded bg-white ${sizeClass}`}>
-            {children && children}
-            {message && <p className="text-center">{message}</p>}
+          <div className={`relative rounded bg-white ${sizeClass}`}>
+            {children}
           </div>
         </div>
       )}

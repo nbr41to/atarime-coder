@@ -18,7 +18,7 @@ export const Layout: FC<Props> = ({ children }) => {
       tabIndex={0}
       onKeyDown={focusScreen}
     >
-      <header className="flex h-[52px] items-center justify-center gap-2 bg-orange-500 p-1">
+      <header className="relative z-10 flex h-[52px] items-center justify-center gap-2 bg-orange-500 p-1">
         <h1 className="text-2xl font-bold tracking-wider text-gray-100">
           あたりめコーダー
         </h1>
@@ -27,7 +27,9 @@ export const Layout: FC<Props> = ({ children }) => {
         </div>
       </header>
 
-      <main className="h-[calc(100%-52px);]">{children}</main>
+      <main className="relative h-[calc(100%-52px);] overflow-hidden">
+        {children}
+      </main>
 
       <footer className="absolute bottom-0 z-10 flex h-[32px] w-full items-center justify-center bg-orange-500 text-center">
         <a
