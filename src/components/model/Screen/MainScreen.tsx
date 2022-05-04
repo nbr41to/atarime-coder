@@ -28,7 +28,7 @@ export const MainScreen: FC<Props> = ({ map }) => {
       onKeyDown={(e) => onKeyDown(e)}
     >
       <Field blocks={map.blocks} coordinate={coordinate} />
-      <FieldInfo message={message} />
+      <FieldInfo message={message} coordinate={coordinate} />
     </div>
   );
 };

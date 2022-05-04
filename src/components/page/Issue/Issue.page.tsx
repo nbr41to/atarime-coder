@@ -3,11 +3,11 @@ import type { FC } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-// import AceEditor from 'react-ace';
 
 import { DifferenceEditor, Editor } from 'src/components/model/Editor';
-import { Button } from 'src/components/ui/Button/Button';
+import { Button } from 'src/components/ui/Button';
 import { answers } from 'src/const/issues/answers';
+import { localStorage } from 'src/utils/localStorage';
 
 export const IssuePage: FC = () => {
   const router = useRouter();
@@ -25,6 +25,7 @@ export const IssuePage: FC = () => {
     const answerMap = answers[issueId].replaceAll('\n', '').replaceAll(' ', '');
     if (userAnswerMap === answerMap) {
       alert('正解です！');
+      localStorage.updateItem('flags', issueId);
     } else {
       alert('不正解です！');
     }
@@ -41,13 +42,17 @@ export const IssuePage: FC = () => {
   return (
     <div className="flex h-full flex-col items-center justify-center">
       {visibleDiffEditor ? (
-        <DifferenceEditor valueArray={[answers[issueId], value]} />
+        <div className="h-[700px] w-[600px]">
+          <DifferenceEditor valueArray={[answers[issueId], value]} />
+        </div>
       ) : (
         <div className="flex items-center justify-center">
           <div className="mdx-styles h-[700px] w-[600px] bg-slate-700 py-4 px-8 text-gray-200">
             <Text />
           </div>
-          <Editor value={value} onChange={setValue} />
+          <div className="h-[700px] w-[600px]">
+            <Editor value={value} onChange={setValue} />
+          </div>
         </div>
       )}
 

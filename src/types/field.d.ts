@@ -45,7 +45,7 @@ export type FieldAction =
     };
 export type FieldMap = {
   blocks: number[][]; // 10 * 10 の Block ID
-  initialCoordinates: FieldCoordinate; // 初期位置の座標
+  initialCoordinate: FieldCoordinate; // 初期位置の座標
   actions: FieldAction[];
 };
 
