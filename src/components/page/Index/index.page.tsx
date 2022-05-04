@@ -14,10 +14,14 @@ export const IndexPage: FC = () => {
       <div>
         <StartButton />
       </div>
-      <br />
-      <Button onClick={() => router.push('/field/a-2')}>
-        パソコンがある場所へ
-      </Button>
+      <div>
+        <Button onClick={() => router.push('/field/a-2')}>
+          パソコンがある場所へ
+        </Button>
+      </div>
+      <div>
+        <Button>お試し版データの削除</Button>
+      </div>
     </div>
   );
 };

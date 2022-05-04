@@ -1,7 +1,6 @@
 import type { FC, ReactNode } from 'react';
 
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+// import { useRouter } from 'next/router';
 import ReactDOM from 'react-dom';
 
 const Portal = ({ children }: { children: ReactNode }) => {
@@ -36,7 +35,7 @@ export const Modal: FC<Props> = ({
   message,
   children,
 }) => {
-  const router = useRouter();
+  // const router = useRouter();
   const closeHandler = () => {
     close();
   };
@@ -44,13 +43,13 @@ export const Modal: FC<Props> = ({
   const sizeClass = sizeClasses[size];
 
   /* ページ遷移時にModalを閉じる */
-  useEffect(() => {
-    router.events.on('routeChangeStart', closeHandler);
+  // useEffect(() => {
+  //   router.events.on('routeChangeStart', closeHandler);
 
-    return () => {
-      router.events.off('routeChangeStart', closeHandler);
-    };
-  }, []);
+  //   return () => {
+  //     router.events.off('routeChangeStart', closeHandler);
+  //   };
+  // }, []);
 
   return (
     <Portal>

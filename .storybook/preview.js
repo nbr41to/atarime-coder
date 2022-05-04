@@ -1,3 +1,4 @@
+// https://storybook.js.org/docs/react/writing-stories/decorators
 import '../styles/globals.css';
 
 import React from 'react';

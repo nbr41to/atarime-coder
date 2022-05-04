@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 import { DifferenceEditor, Editor } from 'src/components/model/Editor';
 import { Button } from 'src/components/ui/Button';
+import { Loader } from 'src/components/ui/Loader';
 import { answers } from 'src/const/issues/answers';
 import { localStorage } from 'src/utils/localStorage';
 
@@ -42,7 +43,10 @@ export const IssuePage: FC = () => {
   return (
     <div className="flex h-full flex-col items-center justify-center">
       {visibleDiffEditor ? (
-        <div className="h-[700px] w-[600px]">
+        <div className="relative h-[700px] w-[1200px]">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <Loader />
+          </div>
           <DifferenceEditor valueArray={[answers[issueId], value]} />
         </div>
       ) : (
@@ -50,7 +54,10 @@ export const IssuePage: FC = () => {
           <div className="mdx-styles h-[700px] w-[600px] bg-slate-700 py-4 px-8 text-gray-200">
             <Text />
           </div>
-          <div className="h-[700px] w-[600px]">
+          <div className="relative h-[700px] w-[600px]">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              <Loader />
+            </div>
             <Editor value={value} onChange={setValue} />
           </div>
         </div>

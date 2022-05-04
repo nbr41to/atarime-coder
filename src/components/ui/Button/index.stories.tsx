@@ -7,7 +7,7 @@ import { Button } from '.';
 export default {
   title: 'UI/Button',
   component: Button,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  // More on control: https://storybook.js.org/docs/react/essentials/controls
   argTypes: {
     children: { control: 'text' },
     color: {
