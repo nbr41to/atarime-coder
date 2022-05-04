@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { FieldPage } from 'src/components/page/Field';
-import { mapA } from 'src/const/maps/map_a';
+import { mapA } from 'src/const/field/map_a';
 
 const Map: NextPage = () => {
   const router = useRouter();

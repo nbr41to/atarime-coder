@@ -84,7 +84,7 @@ export const mapA: FieldMapData = {
       },
       {
         type: 'issue',
-        issueId: '0',
+        issueId: 'js-1-1',
         coordinate: { x: 3, y: 4 },
       },
     ],
