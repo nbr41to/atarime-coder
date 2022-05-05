@@ -108,12 +108,12 @@ export const IssuePage: FC = () => {
             <Button onClick={() => setVisibleDiffEditor(false)}>戻る</Button>
           ) : (
             <>
+              <Button color="secondary" onClick={openStackBlitz}>
+                実際に動かしてみる
+              </Button>
               <Button onClick={checkAnswer}>答え合わせ</Button>
               <Button onClick={() => setVisibleDiffEditor(true)}>
                 解答を見る
-              </Button>
-              <Button color="secondary" onClick={openStackBlitz}>
-                実際に動かしてみる
               </Button>
             </>
           )}

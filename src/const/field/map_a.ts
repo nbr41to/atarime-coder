@@ -357,14 +357,14 @@ export const mapA: FieldMapData = {
       },
       {
         type: 'route',
-        path: 'a-3',
+        path: 'a-7',
         coordinate: { x: 5, y: 9 },
         nextCoordinate: { x: 5, y: 0 },
       },
       /* ↑ */
       {
         type: 'route',
-        path: 'a-7',
+        path: 'a-3',
         coordinate: { x: 4, y: 0 },
         nextCoordinate: { x: 4, y: 9 },
       },
@@ -377,13 +377,13 @@ export const mapA: FieldMapData = {
       /* ← */
       {
         type: 'route',
-        path: 'a-6',
+        path: 'a-3',
         coordinate: { x: 0, y: 4 },
         nextCoordinate: { x: 9, y: 4 },
       },
       {
         type: 'route',
-        path: 'a-6',
+        path: 'a-3',
         coordinate: { x: 0, y: 5 },
         nextCoordinate: { x: 9, y: 5 },
       },
