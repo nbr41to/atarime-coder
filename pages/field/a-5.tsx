@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -22,14 +21,7 @@ const Map: NextPage = () => {
     }
   }, []);
 
-  return (
-    <>
-      <Head>
-        <title>map</title>
-      </Head>
-      <FieldPage fieldMap={fieldMap} />
-    </>
-  );
+  return <FieldPage fieldMap={fieldMap} />;
 };
 
 export default Map;
