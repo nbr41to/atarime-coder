@@ -54,7 +54,7 @@ export const IssuePage: FC = () => {
         <div className="absolute top-0 right-0 pr-2">
           <div className="rotate-45 before:absolute before:-right-[120px] before:-top-[160px]  before:-z-10 before:h-[220px] before:w-[220px] before:bg-gray-200 before:content-['']" />
           <div className="relative z-10 text-xl font-bold">CLEARED</div>
-          <div className="relative z-10 text-right text-4xl">🎯</div>
+          <div className="relative z-10 text-right text-4xl">🚩</div>
         </div>
       )}
 

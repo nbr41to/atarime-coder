@@ -1,42 +1,33 @@
 import type { FC } from 'react';
 
-import dynamic from 'next/dynamic';
+import { DiffEditor } from '@monaco-editor/react';
 
-const AceDifferenceEditor = dynamic(
-  async () => {
-    const { diff } = await import('react-ace');
-    await import('ace-builds/src-noconflict/mode-html');
-    await import('ace-builds/src-noconflict/mode-css');
-    await import('ace-builds/src-noconflict/mode-scss');
-    await import('ace-builds/src-noconflict/mode-javascript');
-    await import('ace-builds/src-noconflict/mode-typescript');
-    await import('ace-builds/src-noconflict/theme-monokai');
-    await import('ace-builds/src-noconflict/ext-language_tools');
-    await import('ace-builds/src-noconflict/mode-snippets');
-    await import('ace-builds/src-noconflict/snippets/javascript');
-    await import('ace-builds/src-noconflict/snippets/typescript');
-
-    return diff;
-  },
-  { ssr: false }
-);
+import { Loader } from 'src/components/ui/Loader';
 
 type Props = {
-  valueArray: string[];
+  original: string;
+  modified: string;
 };
 
-export const DifferenceEditor: FC<Props> = ({ valueArray }) => {
+export const DifferenceEditor: FC<Props> = ({ original, modified }) => {
   return (
-    <AceDifferenceEditor
-      value={valueArray}
-      mode="javascript"
-      theme="monokai"
-      name="ace_difference_editor"
-      editorProps={{ $blockScrolling: true }}
-      readOnly
-      fontSize={18}
-      width="1200px"
-      height="700px"
+    <DiffEditor
+      theme="vs-dark"
+      width={1200}
+      height={700}
+      language="javascript"
+      original={original}
+      modified={modified}
+      loading={<Loader />}
+      beforeMount={(monaco) => {
+        /* フォントサイズの変更 */
+        if (monaco) {
+          // eslint-disable-next-line no-param-reassign
+          monaco.editor.EditorOptions.fontSize.defaultValue = 18;
+
+          // console.log('beforeMount', monaco);
+        }
+      }}
     />
   );
 };

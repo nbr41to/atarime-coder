@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@mdx-js/loader": "^2.1.1",
+    "@monaco-editor/react": "^4.4.4",
     "@next/mdx": "^12.1.6",
     "@stackblitz/sdk": "^1.6.0",
     "ace-builds": "^1.4.14",

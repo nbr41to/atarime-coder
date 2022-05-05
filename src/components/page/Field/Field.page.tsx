@@ -7,11 +7,11 @@ import {
 } from 'src/components/model/FieldMap/Screen';
 
 type Props = {
-  map: FieldMap;
+  fieldMap: FieldMap;
 };
 
-export const FieldPage: FC<Props> = ({ map }) => {
-  if (typeof map === 'undefined') {
+export const FieldPage: FC<Props> = ({ fieldMap }) => {
+  if (typeof fieldMap === 'undefined') {
     return (
       <div className="p-12">
         <LoadingScreen />
@@ -21,7 +21,7 @@ export const FieldPage: FC<Props> = ({ map }) => {
 
   return (
     <div className="p-12">
-      <MainScreen map={map} />
+      <MainScreen fieldMap={fieldMap} />
     </div>
   );
 };

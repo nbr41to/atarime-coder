@@ -9,11 +9,11 @@ import { useMapAction } from 'src/hooks/useMapAction';
 import { UIPanel } from '../UIPanel';
 
 type Props = {
-  map: FieldMap;
+  fieldMap: FieldMap;
 };
 
-export const MainScreen: FC<Props> = ({ map }) => {
-  const { coordinate, message, onKeyDown } = useMapAction(map);
+export const MainScreen: FC<Props> = ({ fieldMap }) => {
+  const { coordinate, message, onKeyDown } = useMapAction(fieldMap);
 
   useEffect(() => {
     document.getElementById('screen')?.focus();
@@ -27,7 +27,7 @@ export const MainScreen: FC<Props> = ({ map }) => {
       tabIndex={0}
       onKeyDown={(e) => onKeyDown(e)}
     >
-      <Field blocks={map.blocks} coordinate={coordinate} />
+      <Field fieldMap={fieldMap} coordinate={coordinate} />
       <UIPanel message={message} coordinate={coordinate} />
     </div>
   );

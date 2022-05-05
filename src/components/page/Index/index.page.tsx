@@ -27,6 +27,7 @@ export const IndexPage: FC = () => {
             const result = window.confirm('本当にデータを削除しますか？');
             if (result) {
               localStorage.clear();
+              router.reload();
             }
           }}
         >
