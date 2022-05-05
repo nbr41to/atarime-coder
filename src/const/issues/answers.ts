@@ -6,7 +6,7 @@ export const answers: {
   };
 } = {
   'js-1-1': {
-    string: 'console.log("イカしてるぜ");\nconsole.log(4 + 7);',
+    string: 'console.log("イカしてるぜ")\nconsole.log(4 + 7)',
     script: () => {
       console.log('イカしてるぜ');
       console.log(4 + 7);
