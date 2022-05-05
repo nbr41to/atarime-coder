@@ -86,7 +86,7 @@ export const Field: FC<Props> = ({ fieldMap, coordinate }) => {
             <div
               // eslint-disable-next-line react/no-array-index-key
               key={`block-(${x},${y})`}
-              className="relative h-[60px] w-[60px]"
+              className="relative h-[60px] w-[60px] overflow-hidden"
             >
               {block === 1 && (
                 <Image
@@ -95,6 +95,7 @@ export const Field: FC<Props> = ({ fieldMap, coordinate }) => {
                   alt="tree"
                   layout="fill"
                 />
+                // <div className="flc text-[50px]">🌳</div> // 絵文字パターンw
               )}
               {block === 2 && (
                 <div className="relative h-[60px] w-[60px]">
@@ -104,6 +105,7 @@ export const Field: FC<Props> = ({ fieldMap, coordinate }) => {
                     layout="fill"
                     objectFit="contain"
                   />
+                  {/* <div className="flc text-[50px]">💻</div> */}
                   {isClearedIssue(x, y) && (
                     <div className="absolute -top-1.5 left-3 text-4xl">🚩</div>
                   )}
@@ -114,6 +116,22 @@ export const Field: FC<Props> = ({ fieldMap, coordinate }) => {
                   className="absolute h-[60px] w-[60px]"
                   src="/strawberry.png"
                   alt="strawberry"
+                  layout="fill"
+                />
+              )}
+              {block === 4 && (
+                <Image
+                  className="absolute h-[60px] w-[60px]"
+                  src="/girl.png"
+                  alt="girl"
+                  layout="fill"
+                />
+              )}
+              {block === 5 && (
+                <Image
+                  className="absolute h-[60px] w-[60px]"
+                  src="/ojizou.png"
+                  alt="ojizou"
                   layout="fill"
                 />
               )}

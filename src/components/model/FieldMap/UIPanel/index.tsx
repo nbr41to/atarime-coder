@@ -40,7 +40,7 @@ export const UIPanel: FC<Props> = ({ message, coordinate }) => {
       </div>
 
       <div className="min-h-[100px] w-[300px] rounded border-4 border-double border-black px-4  py-2">
-        <p className="font-pixel font-bold">{message}</p>
+        <p className="font-pixel whitespace-pre-wrap">{message}</p>
       </div>
 
       <Button onClick={saveAndGoTop}>セーブしてやめる</Button>

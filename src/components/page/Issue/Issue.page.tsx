@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { AnswerView } from 'src/components/model/Issue/AnswerView';
 import { IssueView } from 'src/components/model/Issue/IssueView';
@@ -17,7 +17,7 @@ export const IssuePage: FC = () => {
   const issueId = router.asPath.split('/')[2];
   const isCleared = localStorage.getFlags().includes(issueId);
   const [visibleDiffEditor, setVisibleDiffEditor] = useState(false);
-  const [value, setValue] = useState('console.log("Hello World!");\n');
+  const [value, setValue] = useState('');
   const [isOpenCorrectModal, setIsOpenCorrectModal] = useState(false);
   const [isOpenIncorrectModal, setIsOpenIncorrectModal] = useState(false);
 
@@ -26,6 +26,10 @@ export const IssuePage: FC = () => {
     ssr: false,
   });
 
+  useEffect(() => {
+    document.getElementById('esc')?.focus();
+  }, []);
+
   const checkAnswer = () => {
     /* Proof of correct */
     const userAnswerMap = value
@@ -33,7 +37,7 @@ export const IssuePage: FC = () => {
       .replaceAll('\r', '')
       .replaceAll('"', "'")
       .replaceAll(' ', '');
-    const answerMap = answers[issueId]
+    const answerMap = answers[issueId].string
       .replaceAll('\n', '')
       .replaceAll('\r', '')
       .replaceAll('"', "'")
@@ -41,6 +45,9 @@ export const IssuePage: FC = () => {
 
     if (userAnswerMap === answerMap) {
       localStorage.setFlags(issueId);
+      // eslint-disable-next-line no-console
+      console.log('=== ⬇Consoleの出力結果⬇ ===');
+      answers[issueId].script();
       setIsOpenCorrectModal(true);
     } else {
       setIsOpenIncorrectModal(true);
@@ -49,6 +56,21 @@ export const IssuePage: FC = () => {
 
   return (
     <>
+      {/* ESCで戻る */}
+      <div
+        id="esc"
+        className="absolute top-5 left-6 rounded-md bg-slate-700 px-4 py-3 font-bold text-slate-200 outline-none"
+        role="menuitem"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            router.back();
+          }
+        }}
+      >
+        ESC:戻る
+      </div>
+
       {/* クリア済みラベル */}
       {isCleared && (
         <div className="absolute top-0 right-0 pr-2">
@@ -61,7 +83,7 @@ export const IssuePage: FC = () => {
       {/* Main View */}
       <div className="flex h-full flex-col items-center justify-center">
         {visibleDiffEditor ? (
-          <AnswerView answer={answers[issueId]} userAnswer={value} />
+          <AnswerView answer={answers[issueId].string} userAnswer={value} />
         ) : (
           <IssueView value={value} setValue={setValue} MdComponent={Text} />
         )}
