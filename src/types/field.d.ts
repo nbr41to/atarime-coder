@@ -18,9 +18,9 @@ export type FieldRoute = {
 export type FieldAction =
   | {
       type: 'route';
-      path: string;
-      coordinate: FieldCoordinate;
-      nextCoordinate: FieldCoordinate;
+      path: string; // 移動先の route path
+      coordinate: FieldCoordinate; // 移動のトリガーとなる座標
+      nextCoordinate: FieldCoordinate; // 移動先のマップの座標
     }
   | {
       type: 'message';
@@ -44,6 +44,7 @@ export type FieldAction =
       coordinate: FieldCoordinate; // そのオブジェクトが存在する座標
     };
 export type FieldMap = {
+  entryFlag: number; // フィールド解放に必要なClearフラグ数
   blocks: number[][]; // 10 * 10 の Block ID
   initialCoordinate: FieldCoordinate; // 初期位置の座標
   actions: FieldAction[];

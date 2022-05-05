@@ -1,23 +1,41 @@
 import type { FC } from 'react';
+import type { FieldAction, FieldMap } from 'src/types/field';
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { animated, useSpring } from 'react-spring';
+
+import { localStorage } from 'src/utils/localStorage';
 
 /**
  * @param {number[][]} blocks - Map情報
  * @param {number[]} initialCoordinate - 初期座標
  */
 type Props = {
-  blocks: number[][];
+  fieldMap: FieldMap;
   coordinate: {
     x: number;
     y: number;
   };
 };
 
-export const Field: FC<Props> = ({ blocks, coordinate }) => {
+export const Field: FC<Props> = ({ fieldMap, coordinate }) => {
   const [isLoading, setIsLoading] = useState(true);
+  const userFlags = localStorage.getFlags();
+  const fieldIssues = fieldMap.actions.filter(
+    (action) => action.type === 'issue'
+  ) as Extract<FieldAction, { type: 'issue' }>[];
+
+  const isClearedIssue = (x: number, y: number) => {
+    const issue = fieldIssues.find(
+      (i) => i.coordinate.x === x && i.coordinate.y === y
+    );
+    if (issue) {
+      return userFlags.includes(issue.issueId);
+    }
+
+    return false;
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -63,7 +81,7 @@ export const Field: FC<Props> = ({ blocks, coordinate }) => {
         />
       </animated.div>
       <div className="absolute grid grid-cols-10">
-        {blocks.map((row, y) =>
+        {fieldMap.blocks.map((row, y) =>
           row.map((block, x) => (
             <div
               // eslint-disable-next-line react/no-array-index-key
@@ -79,13 +97,17 @@ export const Field: FC<Props> = ({ blocks, coordinate }) => {
                 />
               )}
               {block === 2 && (
-                <Image
-                  className="absolute h-[60px] w-[60px]"
-                  src="/computer.png"
-                  alt="computer"
-                  layout="fill"
-                  objectFit="contain"
-                />
+                <div className="relative h-[60px] w-[60px]">
+                  <Image
+                    src="/computer.png"
+                    alt="computer"
+                    layout="fill"
+                    objectFit="contain"
+                  />
+                  {isClearedIssue(x, y) && (
+                    <div className="absolute -top-1.5 left-3 text-4xl">🚩</div>
+                  )}
+                </div>
               )}
               {block === 3 && (
                 <Image

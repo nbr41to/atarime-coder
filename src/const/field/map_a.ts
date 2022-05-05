@@ -2,6 +2,7 @@ import type { FieldMapData } from 'src/types/field';
 
 export const mapA: FieldMapData = {
   'a-1': {
+    entryFlag: 0,
     blocks: [
       [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
       [1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
@@ -32,6 +33,7 @@ export const mapA: FieldMapData = {
   },
 
   'a-2': {
+    entryFlag: 0,
     blocks: [
       [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
       [1, 1, 1, 0, 0, 0, 0, 1, 1, 1],
@@ -90,6 +92,7 @@ export const mapA: FieldMapData = {
     ],
   },
   'a-3': {
+    entryFlag: 1,
     blocks: [
       [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
       [1, 1, 1, 0, 0, 0, 0, 1, 1, 1],

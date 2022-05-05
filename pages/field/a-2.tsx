@@ -8,14 +8,14 @@ import { mapA } from 'src/const/field/map_a';
 
 const Map: NextPage = () => {
   const router = useRouter();
-  const map = mapA[router.asPath.split('/')[2]];
+  const fieldMap = mapA[router.asPath.split('/')[2]];
 
   return (
     <>
       <Head>
         <title>map</title>
       </Head>
-      <FieldPage map={map} />
+      <FieldPage fieldMap={fieldMap} />
     </>
   );
 };
