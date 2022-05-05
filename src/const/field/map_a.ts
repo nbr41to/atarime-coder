@@ -473,15 +473,32 @@ export const mapA: FieldMapData = {
       },
       /* issues */
       {
+        type: 'message',
+        blockId: 0,
+        objectId: '',
+        message: 'noos',
+        coordinate: { x: 1, y: 1 },
+        willDisappear: false,
+      },
+      {
+        type: 'message',
+        blockId: 0,
+        objectId: '',
+        message: 'gnimoc',
+        coordinate: { x: 8, y: 8 },
+        willDisappear: false,
+      },
+      /* issues */
+      {
         type: 'issue',
-        issueId: 'js-1-5',
+        issueId: 'js-1-6',
         coordinate: { x: 7, y: 2 },
       },
     ],
   },
 
   'a-8': {
-    entryFlag: 1,
+    entryFlag: 6,
     blocks: [
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
       [1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -495,6 +512,19 @@ export const mapA: FieldMapData = {
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ],
     initialCoordinate: { x: 4, y: 0 },
-    actions: [],
+    actions: [
+      {
+        type: 'route',
+        path: 'a-7',
+        coordinate: { x: 0, y: 4 },
+        nextCoordinate: { x: 9, y: 4 },
+      },
+      {
+        type: 'route',
+        path: 'a-7',
+        coordinate: { x: 0, y: 5 },
+        nextCoordinate: { x: 9, y: 5 },
+      },
+    ],
   },
 };

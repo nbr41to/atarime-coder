@@ -1,19 +1,43 @@
 # JavaScript 1-5. 配列
 
-「Hello World」とはプログラミングでコンピューターになにかを出力させるときによく使用される文字列である。
-君が今イカに転生して「Hello World」な気持ちを JavaScript で表現してみよう。
+配列とはこれまでに使用した文字列や数字などを複数保存するためのものです。これまでは、一つの変数に一つのものしか保存できませんでしたが、この配列を使用することで一つの変数に複数のものを保存することができるようになります。
 
 ## 配列を定義する
 
-```js
-const creatures = ['squid', 'octopus', 'crab', 'shark', 'lobster'];
 ```
+const creatures = ['squid', 'octopus', 'crab', 'shark', 'lobster']
+const someContents = ['moji', 123, false]
+```
+
+- `[]`で囲むことで配列を定義します。
+- 要素は`,`で区切る
+
+## 配列を呼び出す
+
+```
+const creatures = ['squid', 'octopus', 'crab', 'shark', 'lobster']
+console.log(creatures[0]) // squid
+console.log(creatures[3]) // shark
+```
+
+- 配列を保存した変数の後に`[数字]`を付けるでその**番目**の要素を呼び出せる
+- 呼び出しに使用する**番目**の数字は 0 から始まる
+
+## 配列の要素を変更する
+
+```
+const creatures = ['squid', 'octopus', 'crab', 'shark', 'lobster']
+creatures[1] = 'turtle'
+console.log(creatures) // ['squid', 'turtle', 'crab', 'shark', 'lobster']
+```
+
+- **番目**を使って表した配列の要素に値を再代入することで変更できる
 
 ---
 
-## やってみよう
+## やってみよう 🦑
 
-1. `console.log()`を使って、「イカしてるぜ」と出力してみよう
-2. `console.log()`を使って、「4 + 7」を出力してみよう
+1. `directions`という変数に`north`, `east`, `west`, `south`を配列として保存する
+2. Console に`west`を出力しよう
 
 ---

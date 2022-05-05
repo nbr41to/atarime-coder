@@ -14,6 +14,7 @@ type Props = {
 export const UIPanel: FC<Props> = ({ message, coordinate }) => {
   const router = useRouter();
   const userName = localStorage.getUserName();
+  const flags = localStorage.getFlags();
 
   const saveAndGoTop = () => {
     localStorage.setPreviousField(router.asPath.split('/')[2]);
@@ -43,7 +44,13 @@ export const UIPanel: FC<Props> = ({ message, coordinate }) => {
         <p className="font-pixel whitespace-pre-wrap">{message}</p>
       </div>
 
-      <Button onClick={saveAndGoTop}>セーブしてやめる</Button>
+      <div className="text-xl">🚩 {flags.length}</div>
+
+      <div>
+        <Button color="secondary" onClick={saveAndGoTop}>
+          セーブしてやめる
+        </Button>
+      </div>
     </div>
   );
 };

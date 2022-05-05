@@ -16,12 +16,8 @@ export const IndexPage: FC = () => {
         <StartButton />
       </div>
       <div>
-        <Button onClick={() => router.push('/field/a-2')}>
-          パソコンがある場所へ
-        </Button>
-      </div>
-      <div>
         <Button
+          color="danger"
           onClick={() => {
             if (typeof window === 'undefined') return;
             const result = window.confirm('本当にデータを削除しますか？');
