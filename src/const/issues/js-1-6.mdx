@@ -1,0 +1,75 @@
+# JavaScript 1-6. 複数の条件分岐
+
+配列とはこれまでに使用した文字列や数字などを複数保存するためのものです。これまでは、一つの変数に一つのものしか保存できませんでしたが、この配列を使用することで一つの変数に複数のものを保存することができるようになります。
+
+## if 文による条件分岐
+
+```
+const signals = ['red', 'yellow', 'blue']
+const dice = Math.floor(Math.random() * 3) // 0〜2 の整数がランダムで決まる
+const signal = signals[dice]
+
+if (signal === 'blue') {
+  console.log('渡ってよし')
+} else if (signal === 'yellow') {
+  console.log('気をつけて渡ってよし')
+} else if (signal === 'red') {
+  console.log('渡るな危険')
+} else {
+  console.log('故障かな？')
+}
+```
+
+- `Math.floor(Math.random() * n)`でランダムな整数を作成できる（本題でないので説明は省略する）
+- 続けて条件を判定したい場合は`else if`を使う
+- 上から順に条件が満たされた場合に処理が実行され、それ以降の条件は実行されない
+
+## switch 文による条件分岐
+
+```
+const signals = ['red', 'yellow', 'blue']
+const dice = Math.floor(Math.random() * 3) // 0〜2の整数がランダムで決まる
+const signal = signals[dice]
+
+switch (signal) {
+  case 'blue':
+    console.log('渡ってよし')
+    break
+  case 'yellow':
+    console.log('気をつけて渡ってよし')
+    break
+  case 'red':
+    console.log('渡るな危険')
+    break
+  default:
+    // その他
+    console.log('故障かな？')
+    break
+}
+```
+
+- `switch(検証値)`で条件に使用する変数を指定する
+- `case`の後の値と一致している場合に処理が実行される
+- `break`があるとその後の処理は実行されない
+- どの条件にも一致しない場合は`default`の処理が実行される
+
+---
+
+## やってみよう 🦑
+
+1. 下の if 文で書かれた条件分岐を switch 文に置き換えよう
+
+```
+const dice = Math.floor(Math.random() * 3)
+if (dice === 0) {
+console.log('最高にイカしてるぜ！')
+} else if (dice === 1) {
+console.log('ごきげんイカがか？')
+} else if (dice === 2) {
+console.log('まぁまぁじゃないイカ')
+} else {
+console.log('とんだイカれ野郎だ')
+}
+```
+
+---

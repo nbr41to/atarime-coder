@@ -6,12 +6,12 @@ export const baseFieldObjects = [
   },
   {
     code: 1,
-    name: 'wall',
+    name: 'tree',
     isEnterable: false,
   },
   {
     code: 2,
-    name: 'pc',
+    name: 'computer',
     isEnterable: true,
   },
   {
@@ -19,4 +19,18 @@ export const baseFieldObjects = [
     name: 'strawberry',
     isEnterable: true,
   },
+  {
+    code: 4,
+    name: 'girl',
+    isEnterable: true,
+  },
+  {
+    code: 5,
+    name: 'ojizou',
+    isEnterable: false,
+  },
 ];
+
+export const enterableCodes = baseFieldObjects
+  .filter((object) => object.isEnterable)
+  .map((object) => object.code);

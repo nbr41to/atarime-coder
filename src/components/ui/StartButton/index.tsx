@@ -42,12 +42,21 @@ export const StartButton: FC = () => {
       </div>
 
       <Modal isOpen={isOpen} close={closeHandler}>
-        <h2>イカした名前を決めてください。</h2>
-        <Input
-          value={nameState}
-          onChange={(e) => setNameState(e.target.value)}
-        />
-        <Button onClick={nameDecided}>決定</Button>
+        <p>
+          俺は気がついたら森にいた。覚えていることは、前世は人間だったことと、自分の名前だけだ。どうやらイカになって海を飛び出してしまったようだ。これはとんだイカれ野郎だぜ。
+        </p>
+        <br />
+        <p>
+          そんな俺のイカした名前は{' '}
+          <Input
+            value={nameState}
+            onChange={(e) => setNameState(e.target.value)}
+          />{' '}
+          だ。
+        </p>
+        <div className="mt-4 text-center">
+          <Button onClick={nameDecided}>決定</Button>
+        </div>
       </Modal>
     </>
   );

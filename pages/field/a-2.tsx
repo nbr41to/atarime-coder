@@ -1,6 +1,5 @@
 import type { NextPage } from 'next';
 
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 import { FieldPage } from 'src/components/page/Field';
@@ -10,14 +9,7 @@ const Map: NextPage = () => {
   const router = useRouter();
   const fieldMap = mapA[router.asPath.split('/')[2]];
 
-  return (
-    <>
-      <Head>
-        <title>map</title>
-      </Head>
-      <FieldPage fieldMap={fieldMap} />
-    </>
-  );
+  return <FieldPage fieldMap={fieldMap} />;
 };
 
 export default Map;

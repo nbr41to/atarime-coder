@@ -1,8 +1,9 @@
 import type { FC } from 'react';
 
+import stackBlitz from '@stackblitz/sdk';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { AnswerView } from 'src/components/model/Issue/AnswerView';
 import { IssueView } from 'src/components/model/Issue/IssueView';
@@ -10,6 +11,7 @@ import { Button } from 'src/components/ui/Button';
 import { CorrectModal } from 'src/components/ui/CorrectModal';
 import { IncorrectModal } from 'src/components/ui/IncorrectModal';
 import { answers } from 'src/const/issues/answers';
+import { htmlFile } from 'src/const/stackBlitz/html';
 import { localStorage } from 'src/utils/localStorage';
 
 export const IssuePage: FC = () => {
@@ -17,7 +19,7 @@ export const IssuePage: FC = () => {
   const issueId = router.asPath.split('/')[2];
   const isCleared = localStorage.getFlags().includes(issueId);
   const [visibleDiffEditor, setVisibleDiffEditor] = useState(false);
-  const [value, setValue] = useState('console.log("Hello World!");\n');
+  const [value, setValue] = useState('');
   const [isOpenCorrectModal, setIsOpenCorrectModal] = useState(false);
   const [isOpenIncorrectModal, setIsOpenIncorrectModal] = useState(false);
 
@@ -26,6 +28,10 @@ export const IssuePage: FC = () => {
     ssr: false,
   });
 
+  useEffect(() => {
+    document.getElementById('esc')?.focus();
+  }, []);
+
   const checkAnswer = () => {
     /* Proof of correct */
     const userAnswerMap = value
@@ -33,7 +39,7 @@ export const IssuePage: FC = () => {
       .replaceAll('\r', '')
       .replaceAll('"', "'")
       .replaceAll(' ', '');
-    const answerMap = answers[issueId]
+    const answerMap = answers[issueId].string
       .replaceAll('\n', '')
       .replaceAll('\r', '')
       .replaceAll('"', "'")
@@ -41,14 +47,45 @@ export const IssuePage: FC = () => {
 
     if (userAnswerMap === answerMap) {
       localStorage.setFlags(issueId);
+      // eslint-disable-next-line no-console
+      console.log('=== ⬇Consoleの出力結果⬇ ===');
+      answers[issueId].script();
       setIsOpenCorrectModal(true);
     } else {
       setIsOpenIncorrectModal(true);
     }
   };
 
+  const openStackBlitz = () => {
+    stackBlitz.openProject({
+      files: {
+        ...htmlFile,
+        'index.js': value,
+      },
+      title: `Atarime Coder - ${issueId}`,
+      description: `Testing ${issueId}`,
+      template: 'javascript',
+    });
+  };
+
   return (
     <>
+      {/* ESCで戻る */}
+      <div
+        id="esc"
+        className="absolute top-5 left-6 cursor-pointer rounded-md bg-slate-500 px-4 py-3 font-bold text-slate-200 outline-none hover:bg-slate-700"
+        role="menuitem"
+        tabIndex={0}
+        onClick={() => router.back()}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            router.back();
+          }
+        }}
+      >
+        &lt;&lt; ESC:戻る
+      </div>
+
       {/* クリア済みラベル */}
       {isCleared && (
         <div className="absolute top-0 right-0 pr-2">
@@ -61,7 +98,7 @@ export const IssuePage: FC = () => {
       {/* Main View */}
       <div className="flex h-full flex-col items-center justify-center">
         {visibleDiffEditor ? (
-          <AnswerView answer={answers[issueId]} userAnswer={value} />
+          <AnswerView answer={answers[issueId].string} userAnswer={value} />
         ) : (
           <IssueView value={value} setValue={setValue} MdComponent={Text} />
         )}
@@ -71,7 +108,9 @@ export const IssuePage: FC = () => {
             <Button onClick={() => setVisibleDiffEditor(false)}>戻る</Button>
           ) : (
             <>
-              <Button onClick={() => router.back()}>フィールドに戻る</Button>
+              <Button color="secondary" onClick={openStackBlitz}>
+                実際に動かしてみる
+              </Button>
               <Button onClick={checkAnswer}>答え合わせ</Button>
               <Button onClick={() => setVisibleDiffEditor(true)}>
                 解答を見る

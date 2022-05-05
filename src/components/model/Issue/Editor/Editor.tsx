@@ -26,7 +26,7 @@ export const Editor: FC<Props> = ({ value, onChange }) => {
       width={600}
       height={700}
       defaultLanguage="javascript"
-      defaultValue="console.log('Hello World');"
+      language="javascript"
       value={value}
       onChange={onChangeHandler}
       loading={<Loader />}
