@@ -7,7 +7,7 @@ import 'styles/globals.css';
 
 const title = 'あたりめコーダー';
 const description = 'イカに転生してプログラミングを学習するゲーム';
-const url = 'https://atarime-coder.vercel.app/';
+const url = 'https://atarime-coder.vercel.app';
 const image = '/ogp.png';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
