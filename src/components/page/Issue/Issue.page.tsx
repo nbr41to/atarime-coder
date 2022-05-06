@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import stackBlitz from '@stackblitz/sdk';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 
 import { AnswerView } from 'src/components/model/Issue/AnswerView';
 import { IssueView } from 'src/components/model/Issue/IssueView';
@@ -24,9 +24,13 @@ export const IssuePage: FC = () => {
   const [isOpenIncorrectModal, setIsOpenIncorrectModal] = useState(false);
 
   /* 動的 import */
-  const Text = dynamic(() => import(`src/const/issues/${issueId}.mdx`), {
-    ssr: false,
-  });
+  const Text = useMemo(
+    () =>
+      dynamic(() => import(`src/const/issues/${issueId}.mdx`), {
+        ssr: false,
+      }),
+    [issueId]
+  );
 
   useEffect(() => {
     document.getElementById('esc')?.focus();
