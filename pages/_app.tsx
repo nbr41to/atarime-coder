@@ -31,7 +31,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <meta property="twitter:description" content={description} />
         <meta
           property="twitter:image"
-          content="https://atarime-coder.vercel.app/ogp.png"
+          content="https://atarime-coder-pdaemt54p-nbr41to.vercel.app/ogp.png"
         />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:site" content={title} />
