@@ -19,7 +19,9 @@ export const StartButton: FC = () => {
 
   const closeHandler = () => setIsOpen(false);
   const startHandler = () => setIsOpen(true);
+
   const nameDecided = () => {
+    if (!nameState) return;
     localStorage.setUserName(nameState);
     router.push('/field/a-1');
   };
