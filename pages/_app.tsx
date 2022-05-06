@@ -29,12 +29,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <meta property="twitter:url" content={url} />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
-        <meta
-          property="twitter:image"
-          content="https://atarime-coder-pdaemt54p-nbr41to.vercel.app/ogp.png"
-        />
+        <meta property="twitter:image" content={url + image} />
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:site" content={title} />
+        <meta name="twitter:site" content="@Knob_nbr41to" />
 
         <title>{title}</title>
       </Head>
