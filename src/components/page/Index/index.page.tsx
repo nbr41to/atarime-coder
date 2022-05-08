@@ -15,6 +15,7 @@ export const IndexPage: FC = () => {
   return (
     <div className="space-y-4 p-12 text-center">
       <p>イカに転生してプログラミングを勉強しよう！</p>
+      <p className="text-sm">※パソコン💻 で遊んでね！</p>
       <div>
         <StartButton />
       </div>
