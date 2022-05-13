@@ -27,7 +27,7 @@ export const Layout: FC<Props> = ({ children }) => {
         </div>
       </header>
 
-      <main className="relative h-[calc(100%-52px);] overflow-hidden">
+      <main className="relative h-[calc(100%-84px)] overflow-scroll">
         {children}
       </main>
 

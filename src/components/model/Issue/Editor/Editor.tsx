@@ -23,8 +23,6 @@ export const Editor: FC<Props> = ({ value, onChange }) => {
   return (
     <MonacoEditor
       theme="vs-dark"
-      width={600}
-      height={700}
       defaultLanguage="javascript"
       language="javascript"
       value={value}

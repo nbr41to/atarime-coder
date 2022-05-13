@@ -12,10 +12,10 @@ type Props = {
 export const IssueView: FC<Props> = ({ value, setValue, MdComponent }) => {
   return (
     <div className="flex items-center justify-center">
-      <div className="mdx-styles h-[700px] w-[600px] bg-slate-700 py-4 px-8 text-gray-200">
+      <div className="mdx-styles h-[600px] w-[560px] bg-slate-700 py-4 px-8 text-gray-200">
         <MdComponent />
       </div>
-      <div className="h-[700px] w-[600px]">
+      <div className="h-[600px] w-[560px]">
         <Editor value={value} onChange={setValue} />
       </div>
     </div>

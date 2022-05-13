@@ -77,7 +77,7 @@ export const IssuePage: FC = () => {
       {/* ESCで戻る */}
       <div
         id="esc"
-        className="absolute top-5 left-6 cursor-pointer rounded-md bg-slate-500 px-4 py-3 font-bold text-slate-200 outline-none hover:bg-slate-700"
+        className="absolute top-4 left-6 cursor-pointer rounded-md bg-slate-500 px-4 py-3 font-bold text-slate-200 shadow outline-none hover:bg-slate-700"
         role="menuitem"
         tabIndex={0}
         onClick={() => router.back()}
@@ -92,7 +92,7 @@ export const IssuePage: FC = () => {
 
       {/* クリア済みラベル */}
       {isCleared && (
-        <div className="absolute top-0 right-0 pr-2">
+        <div className="absolute top-0 right-0 z-10 pr-2">
           <div className="rotate-45 before:absolute before:-right-[120px] before:-top-[160px]  before:-z-10 before:h-[220px] before:w-[220px] before:bg-gray-200 before:content-['']" />
           <div className="relative z-10 text-xl font-bold">CLEARED</div>
           <div className="relative z-10 text-right text-4xl">🚩</div>
@@ -100,14 +100,15 @@ export const IssuePage: FC = () => {
       )}
 
       {/* Main View */}
-      <div className="flex h-full flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center bg-slate-900 py-12">
         {visibleDiffEditor ? (
           <AnswerView answer={answers[issueId].string} userAnswer={value} />
         ) : (
           <IssueView value={value} setValue={setValue} MdComponent={Text} />
         )}
 
-        <div className="mt-12 space-x-8">
+        {/* Menu Buttons */}
+        <div className="mt-6 space-x-6">
           {visibleDiffEditor ? (
             <Button onClick={() => setVisibleDiffEditor(false)}>戻る</Button>
           ) : (
