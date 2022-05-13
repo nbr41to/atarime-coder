@@ -9,10 +9,10 @@ type Props = {
 
 export const AnswerView: FC<Props> = ({ answer, userAnswer }) => {
   return (
-    <div className="relative h-[700px] w-[1200px]">
+    <div className="relative h-[600px] w-[1120px]">
       <div className="absolute -top-8 flex text-center text-gray-200">
-        <div className="w-[600px]">解答</div>
-        <div className="w-[600px]">あなたの解答</div>
+        <div className="w-[560px]">解答</div>
+        <div className="w-[560px]">あなたの解答</div>
       </div>
       <DifferenceEditor original={answer} modified={userAnswer} />
     </div>

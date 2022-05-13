@@ -13,8 +13,6 @@ export const DifferenceEditor: FC<Props> = ({ original, modified }) => {
   return (
     <DiffEditor
       theme="vs-dark"
-      width={1200}
-      height={700}
       language="javascript"
       original={original}
       modified={modified}
