@@ -116,11 +116,24 @@ export const Building: FC = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        <pre>
-          <code>{JSON.stringify(map)}</code>
-        </pre>
+        <div className="">
+          Map Object
+          <pre className="mx-auto w-fit rounded bg-slate-800 p-6 text-white">
+            <code>
+              {JSON.stringify(
+                map,
+                (key, value) => {
+                  if (key !== 'blocks' && value.length === 10) {
+                    return JSON.stringify(value);
+                  }
+
+                  return value;
+                },
+                4
+              ).replace(/"/g, '')}
+            </code>
+          </pre>
+        </div>
       </div>
     </div>
   );
