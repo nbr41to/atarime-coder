@@ -3,10 +3,10 @@ import type { FieldMap } from 'src/types/field';
 
 import { useEffect } from 'react';
 
-import { Field } from 'src/components/model/FieldMap/Field';
+import { Field } from 'src/components/model/FieldMap/Screen/Field';
 import { useMapAction } from 'src/hooks/useMapAction';
 
-import { UIPanel } from '../UIPanel';
+import { UIPanel } from './UIPanel';
 
 type Props = {
   fieldMap: FieldMap;

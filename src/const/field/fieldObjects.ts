@@ -6,7 +6,7 @@ export const baseFieldObjects = [
   },
   {
     code: 1,
-    name: 'tree',
+    name: 'tree1',
     isEnterable: false,
   },
   {

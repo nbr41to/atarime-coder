@@ -1,11 +1,8 @@
 import type { FC } from 'react';
-import type { FieldAction, FieldMap } from 'src/types/field';
+import type { FieldCoordinate, FieldMap } from 'src/types/field';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import { animated, useSpring } from 'react-spring';
-
-import { localStorage } from 'src/utils/localStorage';
 
 /**
  * @param {number[][]} blocks - Map情報
@@ -17,55 +14,29 @@ type Props = {
     x: number;
     y: number;
   };
+  selectedPanels: FieldCoordinate[];
+  // eslint-disable-next-line no-unused-vars
+  onChangeSelectedPanels: (selectCoordinate: FieldCoordinate) => void;
 };
 
-export const Field: FC<Props> = ({ fieldMap, coordinate }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const userFlags = localStorage.getFlags();
-  const fieldIssues = fieldMap.actions.filter(
-    (action) => action.type === 'issue'
-  ) as Extract<FieldAction, { type: 'issue' }>[];
-
-  const isClearedIssue = (x: number, y: number) => {
-    const issue = fieldIssues.find(
-      (i) => i.coordinate.x === x && i.coordinate.y === y
-    );
-    if (issue) {
-      return userFlags.includes(issue.issueId);
-    }
-
-    return false;
-  };
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 200);
-  }, []);
-
+export const PreviewField: FC<Props> = ({
+  fieldMap,
+  coordinate,
+  selectedPanels,
+  onChangeSelectedPanels,
+}) => {
   const styles = useSpring({
     top: 0,
     left: 0,
     to: { top: coordinate.y * 60, left: coordinate.x * 60 },
   });
 
-  if (isLoading) {
-    const words = ['S', 'Q', 'U', 'I', 'D'];
-    const character = words[Math.floor(Math.random() * words.length)];
-    const positions = [
-      'top-0 left-12',
-      'top-0 right-12',
-      'bottom-0 left-12',
-      'bottom-0 right-12',
-    ];
-    const position = positions[Math.floor(Math.random() * positions.length)];
-
-    return (
-      <div className="relative h-[600px] w-[600px] bg-white outline-none ring-2 ring-slate-600">
-        <div className={`absolute text-[120px] ${position}`}>{character}</div>
-      </div>
+  const isSelected = (c: FieldCoordinate) => {
+    return selectedPanels.some(
+      (selectedCoordinate) =>
+        selectedCoordinate.x === c.x && selectedCoordinate.y === c.y
     );
-  }
+  };
 
   return (
     <div className="relative h-[600px] w-[600px] bg-lime-300 outline-none ring-2 ring-slate-600">
@@ -86,7 +57,19 @@ export const Field: FC<Props> = ({ fieldMap, coordinate }) => {
             <div
               // eslint-disable-next-line react/no-array-index-key
               key={`block-(${x},${y})`}
-              className="relative h-[60px] w-[60px] overflow-hidden"
+              className={`relative h-[60px] w-[60px] cursor-pointer overflow-hidden  ${
+                isSelected({ x, y }) && 'bg-blue-800/30'
+              }`}
+              role="button"
+              tabIndex={0}
+              onClick={() => {
+                onChangeSelectedPanels({ x, y });
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  onChangeSelectedPanels({ x, y });
+                }
+              }}
             >
               {block === 1 && (
                 <Image
@@ -94,22 +77,17 @@ export const Field: FC<Props> = ({ fieldMap, coordinate }) => {
                   src="/tree1.png"
                   alt="tree"
                   layout="fill"
+                  objectFit="contain"
                 />
                 // <div className="flc text-[50px]">🌳</div> // 絵文字パターンw
               )}
               {block === 2 && (
-                <div className="relative h-[60px] w-[60px]">
-                  <Image
-                    src="/computer.png"
-                    alt="computer"
-                    layout="fill"
-                    objectFit="contain"
-                  />
-                  {/* <div className="flc text-[50px]">💻</div> */}
-                  {isClearedIssue(x, y) && (
-                    <div className="absolute -top-1.5 left-3 text-4xl">🚩</div>
-                  )}
-                </div>
+                <Image
+                  src="/computer.png"
+                  alt="computer"
+                  layout="fill"
+                  objectFit="contain"
+                />
               )}
               {block === 3 && (
                 <Image
@@ -117,6 +95,7 @@ export const Field: FC<Props> = ({ fieldMap, coordinate }) => {
                   src="/strawberry.png"
                   alt="strawberry"
                   layout="fill"
+                  objectFit="contain"
                 />
               )}
               {block === 4 && (
@@ -125,6 +104,7 @@ export const Field: FC<Props> = ({ fieldMap, coordinate }) => {
                   src="/girl.png"
                   alt="girl"
                   layout="fill"
+                  objectFit="contain"
                 />
               )}
               {block === 5 && (
@@ -133,6 +113,7 @@ export const Field: FC<Props> = ({ fieldMap, coordinate }) => {
                   src="/ojizou.png"
                   alt="ojizou"
                   layout="fill"
+                  objectFit="contain"
                 />
               )}
             </div>

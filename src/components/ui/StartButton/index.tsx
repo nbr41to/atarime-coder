@@ -23,6 +23,7 @@ export const StartButton: FC = () => {
 
   const nameDecided = () => {
     if (!nameState) return;
+    localStorage.clear();
     localStorage.setUserName(nameState);
     router.push('/field/a-1');
   };

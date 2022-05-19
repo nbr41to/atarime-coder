@@ -27,7 +27,7 @@ export const mapA: FieldMapData = {
         type: 'route',
         path: 'a-2',
         coordinate: { x: 5, y: 0 },
-        nextCoordinate: { x: 4, y: 9 },
+        nextCoordinate: { x: 5, y: 9 },
       },
     ],
   },

@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-import { UIPanel } from '../UIPanel';
+import { UIPanel } from './UIPanel';
 
 export const LoadingScreen: FC = () => {
   return (
