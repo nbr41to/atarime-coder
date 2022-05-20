@@ -11,16 +11,17 @@ export type FieldCoordinate = {
   y: number;
 };
 export type FieldRoute = {
-  path: string; // 移動先の route path
-  coordinate: FieldCoordinate; // 移動のトリガーとなる座標
-  nextCoordinate: FieldCoordinate; // 移動先のマップの座標
+  up: string; // 行き先のpath | "" は移動しない
+  down: string;
+  left: string;
+  right: string;
 };
 export type FieldAction =
   | {
       type: 'route';
       path: string; // 移動先の route path
       coordinate: FieldCoordinate; // 移動のトリガーとなる座標
-      nextCoordinate: FieldCoordinate; // 移動先のマップの座標
+      to: FieldCoordinate; // 移動先のマップの座標
     }
   | {
       type: 'message';
@@ -47,6 +48,7 @@ export type FieldMap = {
   entryFlag: number; // フィールド解放に必要なClearフラグ数
   blocks: number[][]; // 10 * 10 の Block ID
   initialCoordinate: FieldCoordinate; // 初期位置の座標
+  routes: FieldRoute;
   actions: FieldAction[];
 };
 

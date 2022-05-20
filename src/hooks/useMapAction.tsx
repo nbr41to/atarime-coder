@@ -1,5 +1,10 @@
 import type { KeyboardEvent } from 'react';
-import type { FieldCoordinate, FieldMap } from 'src/types/field';
+import type {
+  FieldAction,
+  FieldCoordinate,
+  FieldMap,
+  FieldRoute,
+} from 'src/types/field';
 
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
@@ -7,6 +12,65 @@ import { useState, useEffect } from 'react';
 import { enterableCodes } from 'src/const/field/fieldObjects';
 import { mapA } from 'src/const/field/map_a';
 import { localStorage } from 'src/utils/localStorage';
+
+const defaultRouteCoordinates: {
+  direction: 'up' | 'down' | 'left' | 'right';
+  from: { x: number; y: number };
+  to: { x: number; y: number };
+}[] = [
+  {
+    direction: 'up',
+    from: { x: 4, y: 0 },
+    to: { x: 4, y: 9 },
+  },
+  {
+    direction: 'up',
+    from: { x: 5, y: 0 },
+    to: { x: 5, y: 9 },
+  },
+  {
+    direction: 'down',
+    from: { x: 4, y: 9 },
+    to: { x: 4, y: 0 },
+  },
+  {
+    direction: 'down',
+    from: { x: 5, y: 9 },
+    to: { x: 5, y: 0 },
+  },
+  {
+    direction: 'left',
+    from: { x: 0, y: 4 },
+    to: { x: 9, y: 4 },
+  },
+  {
+    direction: 'left',
+    from: { x: 0, y: 5 },
+    to: { x: 9, y: 5 },
+  },
+  {
+    direction: 'right',
+    from: { x: 9, y: 4 },
+    to: { x: 0, y: 4 },
+  },
+  {
+    direction: 'right',
+    from: { x: 9, y: 5 },
+    to: { x: 0, y: 5 },
+  },
+];
+
+const defaultRouteActions = (
+  routes: FieldRoute
+): Extract<FieldAction, { type: 'route' }>[] =>
+  defaultRouteCoordinates
+    .filter((r) => routes[r.direction])
+    .map((r) => ({
+      type: 'route',
+      path: routes[r.direction] || '',
+      coordinate: r.from,
+      to: r.to,
+    }));
 
 export const useMapAction = (fieldMap: FieldMap) => {
   const router = useRouter();
@@ -48,6 +112,8 @@ export const useMapAction = (fieldMap: FieldMap) => {
     if (isInitial) return;
     localStorage.removeItem('previousCoordinate');
 
+    /* Actionフラグの回収 */
+    fieldMap.actions.push(...defaultRouteActions(fieldMap.routes));
     const action = fieldMap.actions.find(
       (r) =>
         r.coordinate.x === currentCoordinate.x &&
@@ -58,20 +124,15 @@ export const useMapAction = (fieldMap: FieldMap) => {
 
       return;
     }
-    if (action.type === 'message') {
-      setCurrentMessage(action.message);
-
-      return;
-    }
 
     if (action.type === 'route') {
       if (!checkEntryRoute(action.path)) {
-        setCurrentMessage('まだこの先には進めないようだ。');
+        setCurrentMessage('まだこの先には進めないようだ。\n🚩を集めよう！');
 
         return;
       }
 
-      localStorage.setPreviousCoordinate(action.nextCoordinate);
+      localStorage.setPreviousCoordinate(action.to);
       if (router.asPath.split('/')[2] === action.path) {
         router.reload();
       }
@@ -81,11 +142,17 @@ export const useMapAction = (fieldMap: FieldMap) => {
       return;
     }
 
+    if (action.type === 'message') {
+      setCurrentMessage(action.message);
+
+      return;
+    }
+
     if (action.type === 'issue') {
       localStorage.setPreviousCoordinate(currentCoordinate);
       router.push(`/issues/${action.issueId}`);
     }
-  }, [currentCoordinate, fieldMap.actions, router, isInitial]);
+  }, [currentCoordinate, fieldMap, router, isInitial]);
 
   /* 移動ロジック */
   const moveTop = () => {

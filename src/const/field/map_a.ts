@@ -16,20 +16,13 @@ export const mapA: FieldMapData = {
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ],
     initialCoordinate: { x: 3, y: 8 },
-    actions: [
-      {
-        type: 'route',
-        path: 'a-2',
-        coordinate: { x: 4, y: 0 },
-        nextCoordinate: { x: 4, y: 9 },
-      },
-      {
-        type: 'route',
-        path: 'a-2',
-        coordinate: { x: 5, y: 0 },
-        nextCoordinate: { x: 5, y: 9 },
-      },
-    ],
+    routes: {
+      up: 'a-2',
+      down: '',
+      left: '',
+      right: '',
+    },
+    actions: [],
   },
 
   'a-2': {
@@ -47,31 +40,13 @@ export const mapA: FieldMapData = {
       [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
     ],
     initialCoordinate: { x: 4, y: 9 },
+    routes: {
+      up: 'a-3',
+      down: 'a-1',
+      left: '',
+      right: '',
+    },
     actions: [
-      {
-        type: 'route',
-        path: 'a-1',
-        coordinate: { x: 4, y: 9 },
-        nextCoordinate: { x: 4, y: 0 },
-      },
-      {
-        type: 'route',
-        path: 'a-1',
-        coordinate: { x: 5, y: 9 },
-        nextCoordinate: { x: 5, y: 0 },
-      },
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 4, y: 0 },
-        nextCoordinate: { x: 4, y: 9 },
-      },
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 5, y: 0 },
-        nextCoordinate: { x: 5, y: 9 },
-      },
       {
         type: 'message',
         objectId: '',
@@ -102,59 +77,13 @@ export const mapA: FieldMapData = {
       [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
     ],
     initialCoordinate: { x: 4, y: 9 },
+    routes: {
+      up: 'a-4',
+      down: 'a-2',
+      left: 'a-3',
+      right: 'a-3',
+    },
     actions: [
-      /* ↓ */
-      {
-        type: 'route',
-        path: 'a-2',
-        coordinate: { x: 4, y: 9 },
-        nextCoordinate: { x: 4, y: 0 },
-      },
-      {
-        type: 'route',
-        path: 'a-2',
-        coordinate: { x: 5, y: 9 },
-        nextCoordinate: { x: 5, y: 0 },
-      },
-      /* ↑ */
-      {
-        type: 'route',
-        path: 'a-4',
-        coordinate: { x: 4, y: 0 },
-        nextCoordinate: { x: 4, y: 9 },
-      },
-      {
-        type: 'route',
-        path: 'a-4',
-        coordinate: { x: 5, y: 0 },
-        nextCoordinate: { x: 5, y: 9 },
-      },
-      /* ← */
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 0, y: 4 },
-        nextCoordinate: { x: 9, y: 4 },
-      },
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 0, y: 5 },
-        nextCoordinate: { x: 9, y: 5 },
-      },
-      /* → */
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 9, y: 4 },
-        nextCoordinate: { x: 0, y: 4 },
-      },
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 9, y: 5 },
-        nextCoordinate: { x: 0, y: 5 },
-      },
       /* messages */
       {
         type: 'message',
@@ -188,59 +117,13 @@ export const mapA: FieldMapData = {
       [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
     ],
     initialCoordinate: { x: 4, y: 9 },
+    routes: {
+      up: 'a-3',
+      down: 'a-3',
+      left: 'a-3',
+      right: 'a-5',
+    },
     actions: [
-      /* ↓ */
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 4, y: 9 },
-        nextCoordinate: { x: 4, y: 0 },
-      },
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 5, y: 9 },
-        nextCoordinate: { x: 5, y: 0 },
-      },
-      /* ↑ */
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 4, y: 0 },
-        nextCoordinate: { x: 4, y: 9 },
-      },
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 5, y: 0 },
-        nextCoordinate: { x: 5, y: 9 },
-      },
-      /* ← */
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 0, y: 4 },
-        nextCoordinate: { x: 9, y: 4 },
-      },
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 0, y: 5 },
-        nextCoordinate: { x: 9, y: 5 },
-      },
-      /* → */
-      {
-        type: 'route',
-        path: 'a-5',
-        coordinate: { x: 9, y: 4 },
-        nextCoordinate: { x: 0, y: 4 },
-      },
-      {
-        type: 'route',
-        path: 'a-5',
-        coordinate: { x: 9, y: 5 },
-        nextCoordinate: { x: 0, y: 5 },
-      },
       /* issues */
       {
         type: 'issue',
@@ -270,59 +153,13 @@ export const mapA: FieldMapData = {
       [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
     ],
     initialCoordinate: { x: 4, y: 9 },
+    routes: {
+      up: 'a-3',
+      down: 'a-3',
+      left: 'a-6',
+      right: 'a-3',
+    },
     actions: [
-      /* ↓ */
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 4, y: 9 },
-        nextCoordinate: { x: 4, y: 0 },
-      },
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 5, y: 9 },
-        nextCoordinate: { x: 5, y: 0 },
-      },
-      /* ↑ */
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 4, y: 0 },
-        nextCoordinate: { x: 4, y: 9 },
-      },
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 5, y: 0 },
-        nextCoordinate: { x: 5, y: 9 },
-      },
-      /* ← */
-      {
-        type: 'route',
-        path: 'a-6',
-        coordinate: { x: 0, y: 4 },
-        nextCoordinate: { x: 9, y: 4 },
-      },
-      {
-        type: 'route',
-        path: 'a-6',
-        coordinate: { x: 0, y: 5 },
-        nextCoordinate: { x: 9, y: 5 },
-      },
-      /* → */
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 9, y: 4 },
-        nextCoordinate: { x: 0, y: 4 },
-      },
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 9, y: 5 },
-        nextCoordinate: { x: 0, y: 5 },
-      },
       /* Issues */
       {
         type: 'issue',
@@ -347,59 +184,13 @@ export const mapA: FieldMapData = {
       [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
     ],
     initialCoordinate: { x: 4, y: 9 },
+    routes: {
+      up: 'a-3',
+      down: 'a-7',
+      left: 'a-3',
+      right: 'a-3',
+    },
     actions: [
-      /* ↓ */
-      {
-        type: 'route',
-        path: 'a-7',
-        coordinate: { x: 4, y: 9 },
-        nextCoordinate: { x: 4, y: 0 },
-      },
-      {
-        type: 'route',
-        path: 'a-7',
-        coordinate: { x: 5, y: 9 },
-        nextCoordinate: { x: 5, y: 0 },
-      },
-      /* ↑ */
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 4, y: 0 },
-        nextCoordinate: { x: 4, y: 9 },
-      },
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 5, y: 0 },
-        nextCoordinate: { x: 5, y: 9 },
-      },
-      /* ← */
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 0, y: 4 },
-        nextCoordinate: { x: 9, y: 4 },
-      },
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 0, y: 5 },
-        nextCoordinate: { x: 9, y: 5 },
-      },
-      /* → */
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 9, y: 4 },
-        nextCoordinate: { x: 0, y: 4 },
-      },
-      {
-        type: 'route',
-        path: 'a-3',
-        coordinate: { x: 9, y: 5 },
-        nextCoordinate: { x: 0, y: 5 },
-      },
       /* messages */
       {
         type: 'message',
@@ -427,33 +218,13 @@ export const mapA: FieldMapData = {
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ],
     initialCoordinate: { x: 4, y: 0 },
+    routes: {
+      up: 'a-6',
+      down: '',
+      left: '',
+      right: 'a-8',
+    },
     actions: [
-      /* ↑ */
-      {
-        type: 'route',
-        path: 'a-6',
-        coordinate: { x: 4, y: 0 },
-        nextCoordinate: { x: 4, y: 9 },
-      },
-      {
-        type: 'route',
-        path: 'a-6',
-        coordinate: { x: 5, y: 0 },
-        nextCoordinate: { x: 5, y: 9 },
-      },
-      /* → */
-      {
-        type: 'route',
-        path: 'a-8',
-        coordinate: { x: 9, y: 4 },
-        nextCoordinate: { x: 0, y: 4 },
-      },
-      {
-        type: 'route',
-        path: 'a-8',
-        coordinate: { x: 9, y: 5 },
-        nextCoordinate: { x: 0, y: 5 },
-      },
       /* messages */
       {
         type: 'message',
@@ -463,15 +234,6 @@ export const mapA: FieldMapData = {
         coordinate: { x: 4, y: 4 },
         willDisappear: false,
       },
-      {
-        type: 'message',
-        blockId: 4,
-        objectId: '',
-        message: 'よく…ここまでこれたね…\nあとは…まかせた…よ…ぐはっ',
-        coordinate: { x: 4, y: 4 },
-        willDisappear: false,
-      },
-      /* issues */
       {
         type: 'message',
         blockId: 0,
@@ -512,19 +274,12 @@ export const mapA: FieldMapData = {
       [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     ],
     initialCoordinate: { x: 4, y: 0 },
-    actions: [
-      {
-        type: 'route',
-        path: 'a-7',
-        coordinate: { x: 0, y: 4 },
-        nextCoordinate: { x: 9, y: 4 },
-      },
-      {
-        type: 'route',
-        path: 'a-7',
-        coordinate: { x: 0, y: 5 },
-        nextCoordinate: { x: 9, y: 5 },
-      },
-    ],
+    routes: {
+      up: '',
+      down: '',
+      left: 'a-7',
+      right: '',
+    },
+    actions: [],
   },
 };

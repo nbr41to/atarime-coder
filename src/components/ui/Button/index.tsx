@@ -23,7 +23,7 @@ export const Button: FC<Props> = ({
   return (
     <button
       type="button"
-      className={`cursor-pointer rounded-lg py-2 px-6 ${colorClass} disabled:darkness-50 disabled:brightness-75`}
+      className={`cursor-pointer rounded-lg py-2 px-6 ${colorClass} disabled:darkness-50 disabled:cursor-not-allowed disabled:brightness-75`}
       {...props}
     >
       {children}

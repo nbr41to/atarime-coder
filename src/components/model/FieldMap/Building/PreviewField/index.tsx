@@ -16,14 +16,14 @@ type Props = {
   };
   selectedPanels: FieldCoordinate[];
   // eslint-disable-next-line no-unused-vars
-  onChangeSelectedPanels: (selectCoordinate: FieldCoordinate) => void;
+  onChangeSelectedCoordinates: (selectCoordinate: FieldCoordinate) => void;
 };
 
 export const PreviewField: FC<Props> = ({
   fieldMap,
   coordinate,
   selectedPanels,
-  onChangeSelectedPanels,
+  onChangeSelectedCoordinates,
 }) => {
   const styles = useSpring({
     top: 0,
@@ -63,11 +63,11 @@ export const PreviewField: FC<Props> = ({
               role="button"
               tabIndex={0}
               onClick={() => {
-                onChangeSelectedPanels({ x, y });
+                onChangeSelectedCoordinates({ x, y });
               }}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
-                  onChangeSelectedPanels({ x, y });
+                  onChangeSelectedCoordinates({ x, y });
                 }
               }}
             >

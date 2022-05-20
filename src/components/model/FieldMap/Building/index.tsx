@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 import { PreviewField } from 'src/components/model/FieldMap/Building/PreviewField';
 import { Button } from 'src/components/ui/Button';
+import { Input } from 'src/components/ui/Input';
 import { TextArea } from 'src/components/ui/TextArea';
 import { baseFieldObjects } from 'src/const/field/fieldObjects';
 import { useMapAction } from 'src/hooks/useMapAction';
@@ -25,6 +26,12 @@ const initialMap = {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   ],
   initialCoordinate: { x: 0, y: 0 },
+  routes: {
+    up: '',
+    down: '',
+    left: '',
+    right: '',
+  },
   actions: [],
 };
 
@@ -33,30 +40,42 @@ export const Building: FC = () => {
   const [selectedPanels, setSelectedPanels] = useState<FieldCoordinate[]>([]);
   const [editingAction, setEditingAction] = useState('');
   const [inputCoordinate, setInputCoordinate] = useState<FieldCoordinate>();
+  const [messageTextState, setMessageTextState] = useState('');
+  const [issueIdState, setIssueIdState] = useState('');
+  const [routePathsState, setRoutePathsState] = useState({
+    up: '',
+    down: '',
+    left: '',
+    right: '',
+  });
 
   const { coordinate, onKeyDown } = useMapAction(map);
 
   /* 変化させるパネルを選択（複数選択可） */
-  const onChangeSelectedPanels = (selectCoordinate: FieldCoordinate) => {
+  const onChangeSelectedCoordinates = (selectCoordinate: FieldCoordinate) => {
     if (editingAction) {
       /* パネルを選択して座標を入力 */
       setInputCoordinate(selectCoordinate);
-    } else if (
-      /* 変化させるパネルを選択（複数選択可） */
-      selectedPanels.some(
-        (c) => c.x === selectCoordinate.x && c.y === selectCoordinate.y
-      )
-    ) {
-      setSelectedPanels(
-        selectedPanels.filter(
-          (c) => c.x !== selectCoordinate.x || c.y !== selectCoordinate.y
+    }
+    /* 変化させるパネルを選択（複数選択可） */
+    if (!editingAction) {
+      if (
+        selectedPanels.some(
+          (c) => c.x === selectCoordinate.x && c.y === selectCoordinate.y
         )
-      );
-    } else {
-      setSelectedPanels([...selectedPanels, selectCoordinate]);
+      ) {
+        setSelectedPanels(
+          selectedPanels.filter(
+            (c) => c.x !== selectCoordinate.x || c.y !== selectCoordinate.y
+          )
+        );
+      } else {
+        setSelectedPanels([...selectedPanels, selectCoordinate]);
+      }
     }
   };
 
+  /* FieldにObjectを作成 */
   const createObject = (code: number) => {
     if (!selectedPanels) return;
     const newBlocks = [...map.blocks];
@@ -71,16 +90,17 @@ export const Building: FC = () => {
     setSelectedPanels([]);
   };
 
+  /* Message Actionの作成 */
   const createMessageAction = () => {
     if (editingAction !== 'message') return;
-    if (!inputCoordinate) return;
+    if (!inputCoordinate || !messageTextState) return;
     const newActions = [...map.actions];
     newActions.push({
       type: 'message',
       objectId: '',
       blockId: map.blocks[inputCoordinate.y][inputCoordinate.x],
       coordinate: inputCoordinate,
-      message: '',
+      message: messageTextState,
       willDisappear: false,
     });
     setMap({
@@ -89,6 +109,33 @@ export const Building: FC = () => {
     });
     setEditingAction('');
     setInputCoordinate(undefined);
+    setMessageTextState('');
+  };
+
+  /* Issue Actionの作成 */
+  const createIssueAction = () => {
+    if (editingAction !== 'issue') return;
+    if (!inputCoordinate || !issueIdState) return;
+    const newActions = [...map.actions];
+    newActions.push({
+      type: 'issue',
+      issueId: issueIdState,
+      coordinate: inputCoordinate,
+    });
+    setMap({
+      ...map,
+      actions: newActions,
+    });
+    setEditingAction('');
+    setInputCoordinate(undefined);
+    setIssueIdState('');
+  };
+  /* Routesの保存 */
+  const saveRoutePaths = () => {
+    setMap({
+      ...map,
+      routes: routePathsState,
+    });
   };
 
   /* Actionの編集を開始 */
@@ -108,11 +155,31 @@ export const Building: FC = () => {
     setInputCoordinate(undefined);
   };
 
+  /* 選択された座標のActionの削除 */
+  const deleteAction = () => {
+    if (!(selectedPanels.length > 0)) return;
+    const newActions = [...map.actions];
+    selectedPanels.forEach((selectedCoordinate) => {
+      newActions.forEach((action, index) => {
+        if (
+          action.coordinate.x === selectedCoordinate.x &&
+          action.coordinate.y === selectedCoordinate.y
+        ) {
+          newActions.splice(index, 1);
+        }
+      });
+    });
+    setMap({
+      ...map,
+      actions: newActions,
+    });
+  };
+
   return (
-    <div className="flex justify-center gap-4 outline-none">
+    <div className="flex justify-center gap-4">
       <div>
         Map Object
-        <div className="min-h-[604px] overflow-y-scroll rounded bg-slate-800 px-6 py-4 text-white">
+        <div className="max-h-[604px] overflow-y-scroll rounded bg-slate-800 px-6 py-4 text-white">
           <pre>
             <code>
               {JSON.stringify(
@@ -122,22 +189,42 @@ export const Building: FC = () => {
                     return JSON.stringify(value);
                   }
 
+                  if (
+                    key.includes('coordinate') ||
+                    key.includes('Coordinate')
+                  ) {
+                    return JSON.stringify(value);
+                  }
+
                   return value;
                 },
                 4
-              ).replace(/"/g, '')}
+              )
+                .replace(/"/g, '')
+                .replace(/\\/g, '')}
             </code>
           </pre>
         </div>
       </div>
-      <div role="menu" tabIndex={0} onKeyDown={(e) => onKeyDown(e)}>
+      <div
+        className="outline-none"
+        role="menu"
+        tabIndex={0}
+        onKeyDown={(e) => onKeyDown(e)}
+      >
         Field Map
         <PreviewField
           coordinate={coordinate}
           fieldMap={map}
           selectedPanels={selectedPanels}
-          onChangeSelectedPanels={onChangeSelectedPanels}
+          onChangeSelectedCoordinates={onChangeSelectedCoordinates}
         />
+        <div className="mt-2 flex items-start justify-between">
+          <p className="w-[440px] whitespace-pre-wrap text-sm">
+            {selectedPanels.map((c) => `(${c.x},${c.y})`).join(', ')}
+          </p>
+          <Button onClick={() => setSelectedPanels([])}>選択状態を解除</Button>
+        </div>
       </div>
       <div className="flex gap-4">
         <div>
@@ -172,9 +259,13 @@ export const Building: FC = () => {
         <div>
           <h4>Action</h4>
           <div className="flex flex-col gap-2">
-            <Button>route</Button>
             {/* Message Setting */}
-            <Button onClick={() => startEditAction('message')}>message</Button>
+            <Button
+              disabled={!!editingAction}
+              onClick={() => startEditAction('message')}
+            >
+              message
+            </Button>
             {editingAction === 'message' && (
               <div className="flex flex-col gap-2">
                 <div>
@@ -198,7 +289,12 @@ export const Building: FC = () => {
               </div>
             )}
             {/* Issue Setting */}
-            <Button onClick={() => startEditAction('issue')}>issue</Button>
+            <Button
+              disabled={!!editingAction}
+              onClick={() => startEditAction('issue')}
+            >
+              issue
+            </Button>
             {editingAction === 'issue' && (
               <div className="flex flex-col gap-2">
                 <div>
@@ -211,16 +307,77 @@ export const Building: FC = () => {
                     <div>座標を選択してください。</div>
                   )}
                 </div>
-
-                <TextArea placeholder="message" rows={3} />
+                <span>Issue ID:</span>
+                <Input
+                  placeholder="js-1-2"
+                  onChange={(e) => setIssueIdState(e.target.value)}
+                />
                 <div className="space-x-2 text-center">
-                  <Button onClick={createMessageAction}>決定</Button>
+                  <Button onClick={createIssueAction}>決定</Button>
                   <Button color="secondary" onClick={cancelEditingAction}>
                     キャンセル
                   </Button>
                 </div>
               </div>
             )}
+            {/* Route Setting */}
+            <div className="space-y-2">
+              <h4>route</h4>
+              <div className="flex items-center">
+                <span>上:</span>
+                <Input
+                  fullWidth
+                  onChange={(e) =>
+                    setRoutePathsState({
+                      ...routePathsState,
+                      up: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className="flex items-center">
+                <span>右:</span>
+                <Input
+                  fullWidth
+                  onChange={(e) =>
+                    setRoutePathsState({
+                      ...routePathsState,
+                      right: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className="flex items-center">
+                <span>下:</span>
+                <Input
+                  fullWidth
+                  onChange={(e) =>
+                    setRoutePathsState({
+                      ...routePathsState,
+                      down: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className="flex items-center">
+                <span>左:</span>
+                <Input
+                  fullWidth
+                  onChange={(e) =>
+                    setRoutePathsState({
+                      ...routePathsState,
+                      left: e.target.value,
+                    })
+                  }
+                />
+              </div>
+            </div>
+            <Button onClick={saveRoutePaths}>保存</Button>
+          </div>
+          <div className="mt-2">
+            <Button color="secondary" onClick={deleteAction}>
+              Actionの削除
+            </Button>
           </div>
         </div>
       </div>
