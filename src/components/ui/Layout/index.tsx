@@ -8,7 +8,8 @@ type Props = {
 
 export const Layout: FC<Props> = ({ children }) => {
   const focusScreen = () => {
-    document?.getElementById('screen')?.focus();
+    const screen = document?.getElementById('screen');
+    if (screen) screen.focus();
   };
 
   return (
