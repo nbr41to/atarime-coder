@@ -103,6 +103,7 @@ export const Building: FC = () => {
       message: messageTextState,
       willDisappear: false,
     });
+
     setMap({
       ...map,
       actions: newActions,
@@ -279,7 +280,11 @@ export const Building: FC = () => {
                   )}
                 </div>
 
-                <TextArea placeholder="message" rows={3} />
+                <TextArea
+                  placeholder="message"
+                  rows={3}
+                  onChange={(e) => setMessageTextState(e.target.value)}
+                />
                 <div className="space-x-2 text-center">
                   <Button onClick={createMessageAction}>決定</Button>
                   <Button color="secondary" onClick={cancelEditingAction}>

@@ -132,7 +132,6 @@ export const useMapAction = (fieldMap: FieldMap) => {
         return;
       }
 
-      localStorage.setPreviousCoordinate(action.to);
       if (router.asPath.split('/')[2] === action.path) {
         router.reload();
       }

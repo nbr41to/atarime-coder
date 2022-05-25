@@ -16,7 +16,6 @@ export const StartButton: FC = () => {
 
   const userName = localStorage.getUserName();
   const previousField = localStorage.getPreviousField();
-  const previousCoordinate = localStorage.getPreviousCoordinate();
 
   const closeHandler = () => setIsOpen(false);
   const startHandler = () => setIsOpen(true);
@@ -34,7 +33,7 @@ export const StartButton: FC = () => {
   return (
     <>
       <div>
-        {userName && previousField && previousCoordinate ? (
+        {userName && previousField ? (
           <Button color="secondary" onClick={continueHandler}>
             続きから
           </Button>
